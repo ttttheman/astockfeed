@@ -707,7 +707,7 @@
         }
         
         .buy-signals h3 {
-            color: #52c41a;
+            color: #1890ff; /* Changed from green to blue */
         }
         
         .sell-signals h3 {
@@ -776,7 +776,7 @@
         
         .signal-tag {
             background-color: #e6f7ff;
-            color: #1890ff;
+            color: #ff4d4f; /* Changed from blue to red for technical signals */
             padding: 6px 12px;
             border-radius: 4px;
             font-size: 16px;  /* Increased from 14px for more prominence */
@@ -793,6 +793,44 @@
             transform: translateY(-2px);
             box-shadow: 0 3px 6px rgba(0,0,0,0.15);
             background-color: #bae7ff;
+        }
+        
+        /* Adding question mark tooltip to technical signals */
+        .signal-tag .signal-question {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            line-height: 14px;
+            text-align: center;
+            background-color: rgba(0,0,0,0.1);
+            color: #1890ff;
+            border-radius: 50%;
+            margin-left: 5px;
+            font-size: 10px;
+            cursor: help;
+            position: relative;
+        }
+        
+        .signal-tag .signal-tooltip {
+            display: none;
+            position: absolute;
+            z-index: 100;
+            width: 220px;
+            background-color: #fff;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            top: -5px;
+            left: 25px;
+            font-size: 12px;
+            font-weight: normal;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .signal-tag .signal-question:hover .signal-tooltip {
+            display: block;
         }
         
         /* Stock price and chart styles */
@@ -1003,7 +1041,7 @@
             transition: color 0.3s, fill 0.3s;
             z-index: 10;
             opacity: 1 !important; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
-            visibility: visible !important; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
+            visibility: visible !重要; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
             display: block !important; /* 强制显示 */
         }
         
@@ -1339,7 +1377,7 @@
                             </div>
                             <div class="metric">
                                 <div class="metric-label">年化收益率</div>
-                                <div class="metric-value positive">+156%</div>
+                                <div class="metric-value positive">+156%</</div>
                             </div>
                         </div>
                     </div>
