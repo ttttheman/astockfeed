@@ -13,33 +13,34 @@
         }
         
         :root {
-            --primary-color: #1890ff;
-            --primary-dark: #0c63e4;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #ddd;
             --positive-color: #52c41a;
             --negative-color: #f5222d;
             --neutral-color: #faad14;
             --card-bg: #ffffff;
             --bg-color: #f0f2f5;
-            --text-color: #000000d9;
             --secondary-text: #00000073;
-            --border-color: #f0f0f0;
             --shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             --card-radius: 8px;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
             color: var(--text-color);
+            background-color: var(--background-color);
             margin: 0;
             padding: 0;
-            line-height: 1.5;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 100%; /* 修改为100%宽度，占满全屏 */
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 20px; /* 保留一定的左右内边距 */
         }
         
         .card {
@@ -292,10 +293,9 @@
             display: flex;
             flex-direction: row;
             gap: 15px;
-            
-            
+            flex-wrap: wrap; /* 添加wrap属性允许内容换行 */
+            width: 100%; /* 确保占满全宽 */
             margin-top: 15px;
-            
         }
         
         .fundamental-card {
@@ -303,8 +303,8 @@
             border-radius: 4px;
             padding: 12px;
             background-color: white;
-            
-            
+            flex: 1; /* 添加flex属性让卡片平均分配空间 */
+            min-width: 200px; /* 设置最小宽度防止卡片过小 */
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -540,31 +540,32 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .fundamental-signals {
+                overflow-x: auto;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .indices-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .two-column-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .premium-content-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .spotlight-header {
+            .header-content {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .rating-summary {
-                margin-top: 10px;
+            .nav-menu {
+                margin-top: 15px;
             }
             
-            .footer-content {
+            .fundamental-signals {
                 flex-direction: column;
-                gap: 15px;
+            }
+            
+            .fundamental-card {
+                width: 100%;
             }
         }
         
