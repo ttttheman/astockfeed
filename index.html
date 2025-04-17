@@ -725,6 +725,9 @@
             border-radius: 6px;
             padding: 12px;
             transition: all 0.3s;
+            display: flex;  /* Make card flex to allow left-right layout */
+            gap: 20px;      /* Space between stock info and signals */
+            align-items: flex-start;
         }
         
         .stock-signal-card:hover {
@@ -750,66 +753,119 @@
             margin-left: 5px;
         }
         
+        /* Left side with stock info */
+        .stock-info-section {
+            width: 30%;
+            position: relative;
+        }
+        
+        /* Right side with signals */
+        .signals-section {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
         .stock-signal-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 12px;
         }
         
         .signal-tag {
             background-color: #e6f7ff;
             color: #1890ff;
-            padding: 4px 8px;
+            padding: 6px 12px;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 16px;  /* Increased from 14px for more prominence */
+            font-weight: 600;  /* Increased from 500 to make more prominent */
             position: relative;
             cursor: pointer;
+            margin-bottom: 8px;
+            display: inline-block;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
         }
         
-        .signal-tag .signal-tooltip {
-            visibility: hidden;
-            width: 300px;
-            background-color: #333;
-            color: #fff;
-            text-align: left;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 10;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -150px;
-            opacity: 0;
-            transition: opacity 0.3s;
+        .signal-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            background-color: #bae7ff;
+        }
+        
+        /* Stock price and chart styles */
+        .stock-price-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .stock-price {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .stock-change {
+            flex-shrink: 0;
+            padding: 2px 8px;
+            border-radius: 3px;
             font-size: 12px;
-            line-height: 1.5;
-            pointer-events: none;
+            font-weight: 500;
         }
         
-        .signal-tag:hover .signal-tooltip {
-            visibility: visible;
-            opacity: 1;
+        .stock-chart {
+            height: 45px;  /* Reduced from previous size */
+            margin: 5px 0 12px;
+            border: 1px solid #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .view-more {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .stock-signal-card {
+                flex-direction: column;
+            }
+            
+            .stock-info-section, 
+            .signals-section {
+                width: 100%;
+            }
+            
+            .stock-chart {
+                height: 60px; /* Slightly larger on smaller screens */
+            }
         }
         
         /* 添加价格信息和K线图样式 */
         .stock-price-info {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 0;
+            align-items: center; /* Better vertical alignment */
+            gap: 10px; /* Space between price and change */
+            margin-top: 8px;
+            margin-bottom: 8px;
         }
         
         .stock-price {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: 600;
         }
         
         .stock-change {
-            font-size: 14px;
+            flex-shrink: 0;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
             font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 4px;
         }
         
         .stock-change.positive {
@@ -823,8 +879,8 @@
         }
         
         .stock-chart {
-            height: 60px;
-            margin: 5px 0 15px;
+            height: 45px; /* Reduced from 60px */
+            margin: 5px 0 12px;
             border: 1px solid #f0f0f0;
             border-radius: 4px;
             overflow: hidden;
@@ -1760,49 +1816,66 @@
                         <div class="stock-signals">
                             <!-- 股票1 -->
                             <div class="stock-signal-card">
-                                <div class="stock-signal-header">
-                                    <div class="stock-signal-name">
-                                        贵州茅台
-                                        <span class="stock-signal-code">600519</span>
-                                    </div>
-                                    <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="600519" onclick="toggleWatchlist('600519', '贵州茅台', this)">
-                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                    </svg>
-                                </div>
-                                <!-- 添加价格和涨幅信息 -->
-                                <div class="stock-price-info">
-                                    <span class="stock-price">1812.35</span>
-                                    <span class="stock-change positive">+2.67%</span>
-                                </div>
-                                <!-- 添加K线缩略图 -->
-                                <div class="stock-chart">
-                                    <svg width="100%" height="60" viewBox="0 0 240 120" preserveAspectRatio="none">
-                                        <defs>
-                                            <linearGradient id="tech-grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                                                <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
-                                                <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
-                                            </linearGradient>
-                                        </defs>
-                                        <!-- 背景网格 -->
-                                        <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
-                                        <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
-                                        <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
-                                        <!-- K线走势图 - 贵州茅台 -->
-                                        <path d="M0,90 L20,85 L40,80 L60,82 L80,75 L100,65 L120,60 L140,55 L160,45 L180,40 L200,30 L220,25 L240,20" stroke="#52c41a" stroke-width="2" fill="none"/>
-                                        <path d="M0,90 L20,85 L40,80 L60,82 L80,75 L100,65 L120,60 L140,55 L160,45 L180,40 L200,30 L220,25 L240,20 L240,120 L0,120 Z" fill="url(#tech-grad1)"/>
-                                    </svg>
-                                </div>
-                                <div class="stock-signal-list">
-                                    <div class="signal-tag">
-                                        突破上升通道
-                                        <div class="signal-tooltip">
-                                            当股票价格突破上升通道时，表明上升趋势得到确认，价格可能会继续上涨。这是一个强烈的买入信号，尤其是当成交量同步增加时。
+                                <div class="stock-info-section">
+                                    <div class="stock-signal-header">
+                                        <div class="stock-signal-name">
+                                            贵州茅台
+                                            <span class="stock-signal-code">600519</span>
                                         </div>
+                                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="600519" onclick="toggleWatchlist('600519', '贵州茅台', this)">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                        </svg>
                                     </div>
-                                    <div class="signal-tag">
-                                        放量上涨
-                                        <div class="signal-tooltip">
-                                            放量上涨指股价上涨的同时，成交量明显增加。这表明买入力量强劲，通常预示着上涨趋势可能持续。成交量是价格变动的确认指标。
+                                    <!-- 将价格和涨幅并排显示 -->
+                                    <div class="stock-price-info">
+                                        <span class="stock-price">¥1812.35</span>
+                                        <span class="stock-change positive">+2.67%</span>
+                                    </div>
+                                    <!-- 缩小K线图 -->
+                                    <div class="stock-chart">
+                                        <svg width="100%" height="100%" viewBox="0 0 240 100" preserveAspectRatio="none">
+                                            <defs>
+                                                <linearGradient id="tech-grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- 背景网格 -->
+                                            <line x1="0" y1="25" x2="240" y2="25" stroke="#f0f0f0" stroke-width="1"/>
+                                            <line x1="0" y1="50" x2="240" y2="50" stroke="#f0f0f0" stroke-width="1"/>
+                                            <line x1="0" y1="75" x2="240" y2="75" stroke="#f0f0f0" stroke-width="1"/>
+                                            <!-- K线走势图 - 贵州茅台 -->
+                                            <path d="M0,75 L20,70 L40,65 L60,68 L80,62 L100,55 L120,50 L140,45 L160,38 L180,33 L200,25 L220,20 L240,17" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                            <path d="M0,75 L20,70 L40,65 L60,68 L80,62 L100,55 L120,50 L140,45 L160,38 L180,33 L200,25 L220,20 L240,17 L240,100 L0,100 Z" fill="url(#tech-grad1)"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <!-- 增大并突出信号标签 -->
+                                <div class="signals-section">
+                                    <div class="stock-signal-list">
+                                        <div class="signal-tag">
+                                            突破上升通道
+                                            <div class="signal-tooltip">
+                                                当股票价格突破上升通道时，表明上升趋势得到确认，价格可能会继续上涨。这是一个强烈的买入信号，尤其是当成交量同步增加时。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            放量上涨
+                                            <div class="signal-tooltip">
+                                                放量上涨指股价上涨的同时，成交量明显增加。这表明买入力量强劲，通常预示着上涨趋势可能持续。成交量是价格变动的确认指标。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            布林带突破
+                                            <div class="signal-tooltip">
+                                                价格突破布林带上轨，同时成交量明显放大，表明股票进入强势突破阶段，可能继续向上攀升。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            KDJ金叉
+                                            <div class="signal-tooltip">
+                                                KDJ指标中，K线从下方穿越D线形成金叉，同时J线位于低位并向上拐头，这通常是一个较为可靠的买入信号。
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1810,49 +1883,57 @@
                             
                             <!-- 股票2 -->
                             <div class="stock-signal-card">
-                                <div class="stock-signal-header">
-                                    <div class="stock-signal-name">
-                                        宁德时代
-                                        <span class="stock-signal-code">300750</span>
-                                    </div>
-                                    <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="300750" onclick="toggleWatchlist('300750', '宁德时代', this)">
-                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                    </svg>
-                                </div>
-                                <!-- 添加价格和涨幅信息 -->
-                                <div class="stock-price-info">
-                                    <span class="stock-price">165.28</span>
-                                    <span class="stock-change positive">+3.42%</span>
-                                </div>
-                                <!-- 添加K线缩略图 -->
-                                <div class="stock-chart">
-                                    <svg width="100%" height="60" viewBox="0 0 240 120" preserveAspectRatio="none">
-                                        <defs>
-                                            <linearGradient id="tech-grad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                                                <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
-                                                <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
-                                            </linearGradient>
-                                        </defs>
-                                        <!-- 背景网格 -->
-                                        <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
-                                        <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
-                                        <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
-                                        <!-- K线走势图 - 宁德时代 -->
-                                        <path d="M0,80 L20,85 L40,75 L60,70 L80,65 L100,55 L120,60 L140,45 L160,40 L180,35 L200,25 L220,35 L240,30" stroke="#52c41a" stroke-width="2" fill="none"/>
-                                        <path d="M0,80 L20,85 L40,75 L60,70 L80,65 L100,55 L120,60 L140,45 L160,40 L180,35 L200,25 L220,35 L240,30 L240,120 L0,120 Z" fill="url(#tech-grad2)"/>
-                                    </svg>
-                                </div>
-                                <div class="stock-signal-list">
-                                    <div class="signal-tag">
-                                        MACD底部拐头
-                                        <div class="signal-tooltip">
-                                            MACD指标在底部区域由负转正，柱状图从下方向上拐头，表明股票可能已经触底并开始反弹。这是较为可靠的中长期买入信号。
+                                <div class="stock-info-section">
+                                    <div class="stock-signal-header">
+                                        <div class="stock-signal-name">
+                                            宁德时代
+                                            <span class="stock-signal-code">300750</span>
                                         </div>
+                                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="300750" onclick="toggleWatchlist('300750', '宁德时代', this)">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                        </svg>
                                     </div>
-                                    <div class="signal-tag">
-                                        金叉形成
-                                        <div class="signal-tooltip">
-                                            金叉形成是指短期均线（如5日均线）从下方穿越长期均线（如20日均线）。这通常表明股票动量转为正向，是一个经典的技术买入信号。
+                                    <div class="stock-price-info">
+                                        <span class="stock-price">¥165.28</span>
+                                        <span class="stock-change positive">+3.42%</span>
+                                    </div>
+                                    <div class="stock-chart">
+                                        <svg width="100%" height="100%" viewBox="0 0 240 100" preserveAspectRatio="none">
+                                            <defs>
+                                                <linearGradient id="tech-grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- 背景网格 -->
+                                            <line x1="0" y1="25" x2="240" y2="25" stroke="#f0f0f0" stroke-width="1"/>
+                                            <line x1="0" y1="50" x2="240" y2="50" stroke="#f0f0f0" stroke-width="1"/>
+                                            <line x1="0" y1="75" x2="240" y2="75" stroke="#f0f0f0" stroke-width="1"/>
+                                            <!-- K线走势图 - 宁德时代 -->
+                                            <path d="M0,67 L20,70 L40,62 L60,58 L80,54 L100,46 L120,50 L140,37 L160,33 L180,29 L200,21 L220,29 L240,25" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                            <path d="M0,67 L20,70 L40,62 L60,58 L80,54 L100,46 L120,50 L140,37 L160,33 L180,29 L200,21 L220,29 L240,25 L240,100 L0,100 Z" fill="url(#tech-grad2)"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="signals-section">
+                                    <div class="stock-signal-list">
+                                        <div class="signal-tag">
+                                            MACD底部拐头
+                                            <div class="signal-tooltip">
+                                                MACD指标在底部区域由负转正，柱状图从下方向上拐头，表明股票可能已经触底并开始反弹。这是较为可靠的中长期买入信号。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            金叉形成
+                                            <div class="signal-tooltip">
+                                                金叉形成是指短期均线（如5日均线）从下方穿越长期均线（如20日均线）。这通常表明股票动量转为正向，是一个经典的技术买入信号。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            成交量突破
+                                            <div class="signal-tooltip">
+                                                近期成交量明显放大，突破近30日平均水平，且价格同步上升，表明多方力量增强，买盘积极。
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1860,55 +1941,63 @@
                             
                             <!-- 股票3 -->
                             <div class="stock-signal-card">
-                                <div class="stock-signal-header">
-                                    <div class="stock-signal-name">
-                                        中芯国际
-                                        <span class="stock-signal-code">688981</span>
-                                    </div>
-                                    <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="688981" onclick="toggleWatchlist('688981', '中芯国际', this)">
-                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                    </svg>
-                                </div>
-                                <!-- 添加价格和涨幅信息 -->
-                                <div class="stock-price-info">
-                                    <span class="stock-price">78.54</span>
-                                    <span class="stock-change positive">+4.32%</span>
-                                </div>
-                                <!-- 添加K线缩略图 -->
-                                <div class="stock-chart">
-                                    <svg width="100%" height="60" viewBox="0 0 240 120" preserveAspectRatio="none">
-                                        <defs>
-                                            <linearGradient id="tech-grad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                                                <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
-                                                <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
-                                            </linearGradient>
-                                        </defs>
-                                        <!-- 背景网格 -->
-                                        <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
-                                        <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
-                                        <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
-                                        <!-- K线走势图 - 中芯国际 -->
-                                        <path d="M0,90 L20,80 L40,85 L60,70 L80,75 L100,65 L120,60 L140,55 L160,50 L180,45 L200,40 L220,35 L240,40" stroke="#52c41a" stroke-width="2" fill="none"/>
-                                        <path d="M0,90 L20,80 L40,85 L60,70 L80,75 L100,65 L120,60 L140,55 L160,50 L180,45 L200,40 L220,35 L240,40 L240,120 L0,120 Z" fill="url(#tech-grad3)"/>
-                                    </svg>
-                                </div>
-                                <div class="stock-signal-list">
-                                    <div class="signal-tag">
-                                        放量上涨
-                                        <div class="signal-tooltip">
-                                            放量上涨指股价上涨的同时，成交量明显增加。这表明买入力量强劲，通常预示着上涨趋势可能持续。成交量是价格变动的确认指标。
+                                <div class="stock-info-section">
+                                    <div class="stock-signal-header">
+                                        <div class="stock-signal-name">
+                                            中芯国际
+                                            <span class="stock-signal-code">688981</span>
                                         </div>
+                                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="688981" onclick="toggleWatchlist('688981', '中芯国际', this)">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                        </svg>
                                     </div>
-                                    <div class="signal-tag">
-                                        突破上升通道
-                                        <div class="signal-tooltip">
-                                            当股票价格突破上升通道时，表明上升趋势得到确认，价格可能会继续上涨。这是一个强烈的买入信号，尤其是当成交量同步增加时。
+                                    <div class="stock-price-info">
+                                        <span class="stock-price">¥78.54</span>
+                                        <span class="stock-change positive">+4.32%</span>
+                                    </div>
+                                    <div class="stock-chart">
+                                        <svg width="100%" height="100%" viewBox="0 0 240 100" preserveAspectRatio="none">
+                                            <defs>
+                                                <linearGradient id="tech-grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- 背景网格 -->
+                                            <line x1="0" y1="25" x2="240" y2="25" stroke="#f0f0f0" stroke-width="1"/>
+                                            <line x1="0" y1="50" x2="240" y2="50" stroke="#f0f0f0" stroke-width="1"/>
+                                            <line x1="0" y1="75" x2="240" y2="75" stroke="#f0f0f0" stroke-width="1"/>
+                                            <!-- K线走势图 - 中芯国际 -->
+                                            <path d="M0,75 L20,66 L40,71 L60,58 L80,62 L100,54 L120,50 L140,46 L160,42 L180,37 L200,33 L220,29 L240,33" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                            <path d="M0,75 L20,66 L40,71 L60,58 L80,62 L100,54 L120,50 L140,46 L160,42 L180,37 L200,33 L220,29 L240,33 L240,100 L0,100 Z" fill="url(#tech-grad3)"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="signals-section">
+                                    <div class="stock-signal-list">
+                                        <div class="signal-tag">
+                                            放量上涨
+                                            <div class="signal-tooltip">
+                                                放量上涨指股价上涨的同时，成交量明显增加。这表明买入力量强劲，通常预示着上涨趋势可能持续。成交量是价格变动的确认指标。
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="signal-tag">
-                                        MACD底部拐头
-                                        <div class="signal-tooltip">
-                                            MACD指标在底部区域由负转正，柱状图从下方向上拐头，表明股票可能已经触底并开始反弹。这是较为可靠的中长期买入信号。
+                                        <div class="signal-tag">
+                                            突破上升通道
+                                            <div class="signal-tooltip">
+                                                当股票价格突破上升通道时，表明上升趋势得到确认，价格可能会继续上涨。这是一个强烈的买入信号，尤其是当成交量同步增加时。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            MA5上穿MA10
+                                            <div class="signal-tooltip">
+                                                5日均线从下方穿越10日均线，形成短期金叉，表明短期动能增强，可能出现上涨行情。
+                                            </div>
+                                        </div>
+                                        <div class="signal-tag">
+                                            RSI底部背离
+                                            <div class="signal-tooltip">
+                                                价格创出新低，但RSI指标未创新低，形成底部背离，通常是股价即将反转向上的信号。
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
