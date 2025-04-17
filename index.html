@@ -277,15 +277,12 @@
         
         /* 修改signal-category中的h3标题样式 */
         .signal-category h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-            text-align: left;
-            color: var(--text-color);
+            font-size: 16px;
             font-weight: 600;
-            width: 100%;
-            display: block;
+            margin-bottom: 12px;
+            color: var(--primary-color); /* 使用蓝色主题色 */
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-color);
         }
         
         /* 修改fundamental-signals样式，保留横向滚动 */
@@ -903,9 +900,20 @@
             width: 24px;
             height: 24px;
             cursor: pointer;
-            color: var(--secondary-text);
+            color: #d9d9d9; /* 默认颜色改为浅灰色，确保始终可见 */
             transition: color 0.3s, fill 0.3s;
             z-index: 10;
+            opacity: 1 !important; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
+            visibility: visible !important; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
+            display: block !important; /* 强制显示 */
+        }
+        
+        /* 明确为基本面卡片中的收藏图标添加样式 */
+        .fundamental-card .watch-icon {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            pointer-events: auto !important;
         }
         
         .watch-icon.active {
@@ -919,6 +927,126 @@
         
         .performance-card, .spotlight-card {
             position: relative;
+        }
+        
+        /* 收藏图标样式 */
+        .favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #d9d9d9;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .favorite-icon:hover {
+            color: #faad14;
+        }
+        
+        .favorite-icon.active {
+            color: #faad14;
+        }
+        
+        /* 股票价格和涨幅样式 */
+        .stock-price-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        
+        .stock-price {
+            font-weight: 600;
+        }
+        
+        .stock-change {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .stock-change.positive {
+            background-color: rgba(82, 196, 26, 0.1);
+            color: var(--positive-color);
+        }
+        
+        .stock-change.negative {
+            background-color: rgba(245, 34, 45, 0.1);
+            color: var(--negative-color);
+        }
+        
+        .stock-change.neutral {
+            background-color: rgba(250, 173, 20, 0.1);
+            color: var(--neutral-color);
+        }
+        
+        /* 页面分享按钮样式 */
+        .share-button {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .share-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .share-button svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        
+        .share-options {
+            position: fixed;
+            right: 40px;
+            bottom: 90px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 99;
+            display: none;
+        }
+        
+        .share-options.active {
+            display: block;
+        }
+        
+        .share-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .share-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .share-option img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .share-option span {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -1429,27 +1557,48 @@
                         <div class="fundamental-signals">
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="600519" onclick="toggleWatchlist('600519', '贵州茅台', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">600519</span>
                                     <span class="stock-name">贵州茅台</span>
                                 </div>
                                 <p class="sentiment-reason">Q1营收和利润均超预期增长</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">1827.88</span>
+                                    <span class="stock-change positive">+2.35%</span>
+                                </div>
                             </div>
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="300750" onclick="toggleWatchlist('300750', '宁德时代', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">300750</span>
                                     <span class="stock-name">宁德时代</span>
                                 </div>
                                 <p class="sentiment-reason">年度净利润大幅增长，市场份额提升</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">214.56</span>
+                                    <span class="stock-change positive">+3.12%</span>
+                                </div>
                             </div>
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="002475" onclick="toggleWatchlist('002475', '立讯精密', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">002475</span>
                                     <span class="stock-name">立讯精密</span>
                                 </div>
                                 <p class="sentiment-reason">季度营收强劲，超市场预期</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">32.17</span>
+                                    <span class="stock-change positive">+1.87%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1459,27 +1608,48 @@
                         <div class="fundamental-signals">
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">上调</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="601012" onclick="toggleWatchlist('601012', '隆基绿能', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">601012</span>
                                     <span class="stock-name">隆基绿能</span>
                                 </div>
                                 <p class="sentiment-reason">多家券商上调评级至"买入"，看好光伏需求</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">41.85</span>
+                                    <span class="stock-change positive">+2.58%</span>
+                                </div>
                             </div>
                              <div class="fundamental-card">
                                 <span class="signal-label signal-positive">上调</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="600036" onclick="toggleWatchlist('600036', '招商银行', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">600036</span>
                                     <span class="stock-name">招商银行</span>
                                 </div>
                                 <p class="sentiment-reason">估值修复，多家机构上调目标价</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">39.46</span>
+                                    <span class="stock-change positive">+1.23%</span>
+                                </div>
                             </div>
                              <div class="fundamental-card">
                                 <span class="signal-label signal-positive">上调</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="600809" onclick="toggleWatchlist('600809', '山西汾酒', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">600809</span>
                                     <span class="stock-name">山西汾酒</span>
                                 </div>
                                 <p class="sentiment-reason">高端化进程顺利，机构看好长期增长</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">267.93</span>
+                                    <span class="stock-change negative">-0.45%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1489,27 +1659,48 @@
                         <div class="fundamental-signals">
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="688981" onclick="toggleWatchlist('688981', '中芯国际', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">688981</span>
                                     <span class="stock-name">中芯国际</span>
                                 </div>
                                 <p class="sentiment-reason">获得国家大基金三期注资，加速产能扩张</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">78.54</span>
+                                    <span class="stock-change positive">+4.32%</span>
+                                </div>
                             </div>
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="000333" onclick="toggleWatchlist('000333', '美的集团', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">000333</span>
                                     <span class="stock-name">美的集团</span>
                                 </div>
                                 <p class="sentiment-reason">宣布重大资产重组，拟收购工业自动化龙头</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">57.23</span>
+                                    <span class="stock-change positive">+1.65%</span>
+                                </div>
                             </div>
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
+                                <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-code="600276" onclick="toggleWatchlist('600276', '恒瑞医药', this)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
                                 <div class="stock-info">
                                     <span class="stock-code">600276</span>
                                     <span class="stock-name">恒瑞医药</span>
                                 </div>
                                 <p class="sentiment-reason">创新药获得美国FDA批准上市</p>
+                                <div class="stock-price-info">
+                                    <span class="stock-price">43.78</span>
+                                    <span class="stock-change negative">-0.86%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1908,5 +2099,78 @@
             });
         });
     </script>
+
+    <script>
+        // ... existing code ...
+        
+        // 添加分享功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const shareButton = document.querySelector('.share-button');
+            const shareOptions = document.querySelector('.share-options');
+            
+            shareButton.addEventListener('click', function() {
+                shareOptions.classList.toggle('active');
+            });
+            
+            // 点击页面其他地方关闭分享选项
+            document.addEventListener('click', function(e) {
+                if (!shareButton.contains(e.target) && !shareOptions.contains(e.target)) {
+                    shareOptions.classList.remove('active');
+                }
+            });
+            
+            // 实现分享功能
+            document.querySelectorAll('.share-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const platform = this.getAttribute('data-platform');
+                    const url = encodeURIComponent(window.location.href);
+                    const title = encodeURIComponent('每日投资机会速递');
+                    let shareUrl = '';
+                    
+                    if (platform === 'wechat') {
+                        // 微信分享通常需要使用微信SDK，这里仅作示例
+                        alert('请使用微信扫描二维码分享');
+                    } else if (platform === 'qq') {
+                        shareUrl = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}`;
+                        window.open(shareUrl);
+                    } else if (platform === 'weibo') {
+                        shareUrl = `http://service.weibo.com/share/share.php?url=${url}&title=${title}`;
+                        window.open(shareUrl);
+                    } else if (platform === 'qzone') {
+                        shareUrl = `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&title=${title}`;
+                        window.open(shareUrl);
+                    }
+                    
+                    // 关闭分享选项
+                    shareOptions.classList.remove('active');
+                });
+            });
+        });
+    </script>
+
+    <div class="share-button">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+        </svg>
+    </div>
+    
+    <div class="share-options">
+        <div class="share-option" data-platform="wechat">
+            <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.png" alt="微信">
+            <span>分享到微信</span>
+        </div>
+        <div class="share-option" data-platform="qq">
+            <img src="https://qzonestyle.gtimg.cn/qzone/qzact/act/external/tiqq/logo.png" alt="QQ">
+            <span>分享到QQ</span>
+        </div>
+        <div class="share-option" data-platform="weibo">
+            <img src="https://weibo.com/favicon.ico" alt="微博">
+            <span>分享到微博</span>
+        </div>
+        <div class="share-option" data-platform="qzone">
+            <img src="https://qzonestyle.gtimg.cn/qzone/v8/img/favicon.ico" alt="QQ空间">
+            <span>分享到QQ空间</span>
+        </div>
+    </div>
 </body>
 </html>
