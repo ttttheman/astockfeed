@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日投资机会速递 | 2025年3月29日</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #1890ff;
+            --primary-dark: #0c63e4;
+            --positive-color: #52c41a;
+            --negative-color: #f5222d;
+            --neutral-color: #faad14;
+            --card-bg: #ffffff;
+            --bg-color: #f0f2f5;
+            --text-color: #000000d9;
+            --secondary-text: #00000073;
+            --border-color: #f0f0f0;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            --card-radius: 8px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .positive {
+            color: var(--positive-color);
+        }
+        
+        .negative {
+            color: var(--negative-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+        .date-info {
+            text-align: right;
+        }
+        
+        .date {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .weekday {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Dashboard Content */
+        .dashboard-content {
+            padding-bottom: 30px;
+        }
+        
+        /* Market Overview */
+        .market-overview {
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .indices-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 240px;
+        }
+        
+        .index-card {
+            padding: 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .index-card h3 {
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+        
+        .index-card .value {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .index-card .change {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .market-summary {
+            background-color: rgba(24, 144, 255, 0.05);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-right: 260px;
+        }
+        
+        /* Grid Layouts */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Hot Sectors */
+        .sector-list {
+            list-style: none;
+        }
+        
+        .sector-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sector-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .rank {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        /* Top Stocks */
+        .top-list-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 8px 16px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+        
+        .data-table th {
+            background-color: #fafafa;
+            font-weight: 500;
+        }
+        
+        /* Fundamental Signals */
+        .fundamental-signals-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .signal-category {
+            margin-bottom: 0;
+            background-color: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .signal-category h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .fundamental-signals {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .fundamental-card {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 12px;
+            background-color: white;
+        }
+        
+        .signal-label {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .signal-positive {
+            background-color: rgba(82, 196, 26, 0.1);
+            color: var(--positive-color);
+        }
+        
+        .signal-negative {
+            background-color: rgba(245, 34, 45, 0.1);
+            color: var(--negative-color);
+        }
+        
+        .signal-neutral {
+            background-color: rgba(250, 173, 20, 0.1);
+            color: var(--neutral-color);
+        }
+        
+        /* Stock Spotlight */
+        .stock-spotlight-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .spotlight-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .spotlight-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spotlight-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .stock-info-primary {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .stock-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .stock-code {
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+        
+        .stock-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .stock-chart-small {
+            width: 200px;
+            height: 80px;
+            background-color: #fafafa;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .recommendation-reason {
+            background-color: rgba(24, 144, 255, 0.05);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .reason-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        
+        .spotlight-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .recommendation-index {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .star {
+            color: #faad14;
+            font-size: 14px;
+        }
+        
+        .view-report {
+            color: var(--primary-color);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .view-report:hover {
+            text-decoration: underline;
+        }
+        
+        /* Premium Content */
+        .premium-content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .premium-item {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .premium-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .premium-item p {
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+        
+        .premium-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 2px 6px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .subscribe-cta {
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            margin-left: 10px;
+        }
+        
+        /* Footer */
+        .main-footer {
+            background-color: #001529;
+            color: rgba(255, 255, 255, 0.65);
+            padding: 20px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-apps {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .app-icon {
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .indices-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .premium-content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .spotlight-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .rating-summary {
+                margin-top: 10px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* Performance History */
+        .performance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .sort-select {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-select select {
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: white;
+        }
+        
+        .more-link {
+            margin-left: auto;
+            font-size: 14px;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .more-link:hover {
+            text-decoration: underline;
+        }
+        
+        .performance-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 15px;
+        }
+        
+        .performance-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        .performance-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stock-chart {
+            width: 100%;
+            height: 120px;
+            background-color: #fafafa;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .stock-chart img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .stock-performance-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .stock-name-code h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .suggested-date {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+        
+        .total-return {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: var(--secondary-text);
+            margin-bottom: 2px;
+        }
+        
+        .metric-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Technical Signals */
+        .technical-signals-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .signal-column {
+            background-color: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .buy-signals h3 {
+            color: var(--positive-color);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .sell-signals h3 {
+            color: var(--negative-color);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .signal-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .signal-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .signal-group h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .help-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(24, 144, 255, 0.1);
+            color: var(--primary-color);
+            font-size: 12px;
+            margin-left: 5px;
+            cursor: help;
+            position: relative;
+        }
+        
+        .help-tooltip {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-size: 12px;
+            color: var(--text-color);
+            z-index: 10;
+            display: none;
+        }
+        
+        .help-icon:hover .help-tooltip {
+            display: block;
+        }
+        
+        .stock-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .stock-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: rgba(24, 144, 255, 0.1);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        
+        .stock-tag:hover {
+            background-color: rgba(24, 144, 255, 0.2);
+        }
+        
+        .stock-tag .stock-code {
+            color: var(--secondary-text);
+            font-size: 10px;
+            margin-left: 3px;
+        }
+        
+        .stock-tag.more {
+            background-color: #f5f5f5;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="4" fill="#1890FF" fill-opacity="0.2"></rect>
+                        <path d="M8 20L14 14L20 20L28 12" stroke="#1890FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="26" cy="10" r="2" fill="#1890FF"></circle>
+                    </svg>
+                    <h1>每日投资机会速递</h1>
+                </div>
+                <div class="date-info">
+                    <div class="date">2025年3月29日</div>
+                    <div class="weekday">星期六</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <div class="container">
+            <section class="market-overview card">
+                <h2>市场概览 MARKET OVERVIEW</h2>
+                <div class="indices-row">
+                    <div class="index-card">
+                        <h3>上证指数</h3>
+                        <div class="value">3,682.16</div>
+                        <div class="change positive">↑2.1%</div>
+                    </div>
+                    <div class="index-card">
+                        <h3>深证成指</h3>
+                        <div class="value">14,126.89</div>
+                        <div class="change positive">↑1.8%</div>
+                    </div>
+                    <div class="index-card">
+                        <h3>创业板指</h3>
+                        <div class="value">2,856.42</div>
+                        <div class="change positive">↑1.5%</div>
+                    </div>
+                    <div class="index-card">
+                        <h3>成交量</h3>
+                        <div class="value">8,547亿</div>
+                        <div class="change positive">↑12.3%</div>
+                    </div>
+                </div>
+                <div class="market-summary">
+                    <p>昨日市场整体表现强劲，A股三大指数全线上涨，上证指数涨幅超2%。成交量环比增加12.3%，显示资金活跃度明显提升。科技板块领涨，人工智能、半导体和新能源三大板块成为市场主要热点，机构资金持续流入。市场情绪整体偏向乐观，有27只个股涨停，技术面显示短期上行趋势有望延续。</p>
+                </div>
+            </section>
+
+            <section class="performance-history card">
+                <h2>历史推荐表现最佳股票 BEST PERFORMING STOCKS</h2>
+                <div class="performance-header">
+                    <div class="sort-select">
+                        <span>排名方式:</span>
+                        <select id="performance-sort">
+                            <option value="daily">平均日涨幅</option>
+                            <option value="total">总涨幅</option>
+                        </select>
+                    </div>
+                    <a href="performance-history.html" class="more-link">更多 &rsaquo;</a>
+                </div>
+                <div class="performance-cards">
+                    <div class="performance-card" onclick="window.location.href='stock-detail.html?code=600519'">
+                        <div class="stock-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- 背景网格 -->
+                                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                                <!-- K线走势图 - 贵州茅台 -->
+                                <path d="M0,90 L20,85 L40,80 L60,82 L80,75 L100,65 L120,60 L140,55 L160,45 L180,40 L200,30 L220,25 L240,20" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                <path d="M0,90 L20,85 L40,80 L60,82 L80,75 L100,65 L120,60 L140,55 L160,45 L180,40 L200,30 L220,25 L240,20 L240,120 L0,120 Z" fill="url(#grad1)"/>
+                            </svg>
+                        </div>
+                        <div class="stock-performance-header">
+                            <div class="stock-name-code">
+                                <h4>贵州茅台</h4>
+                                <div class="suggested-date">推荐日: 2025/01/15</div>
+                            </div>
+                            <div class="total-return positive">+42.8%</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-label">平均日涨幅</div>
+                                <div class="metric-value positive">+0.58%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">年化收益率</div>
+                                <div class="metric-value positive">+185%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-card" onclick="window.location.href='stock-detail.html?code=300750'">
+                        <div class="stock-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- 背景网格 -->
+                                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                                <!-- K线走势图 - 宁德时代 -->
+                                <path d="M0,80 L20,85 L40,75 L60,70 L80,65 L100,55 L120,60 L140,45 L160,40 L180,35 L200,25 L220,35 L240,30" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                <path d="M0,80 L20,85 L40,75 L60,70 L80,65 L100,55 L120,60 L140,45 L160,40 L180,35 L200,25 L220,35 L240,30 L240,120 L0,120 Z" fill="url(#grad2)"/>
+                            </svg>
+                        </div>
+                        <div class="stock-performance-header">
+                            <div class="stock-name-code">
+                                <h4>宁德时代</h4>
+                                <div class="suggested-date">推荐日: 2025/02/05</div>
+                            </div>
+                            <div class="total-return positive">+36.5%</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-label">平均日涨幅</div>
+                                <div class="metric-value positive">+0.52%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">年化收益率</div>
+                                <div class="metric-value positive">+172%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-card" onclick="window.location.href='stock-detail.html?code=603259'">
+                        <div class="stock-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- 背景网格 -->
+                                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                                <!-- K线走势图 - 药明康德 -->
+                                <path d="M0,90 L20,80 L40,85 L60,70 L80,75 L100,65 L120,60 L140,55 L160,50 L180,45 L200,40 L220,35 L240,40" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                <path d="M0,90 L20,80 L40,85 L60,70 L80,75 L100,65 L120,60 L140,55 L160,50 L180,45 L200,40 L220,35 L240,40 L240,120 L0,120 Z" fill="url(#grad3)"/>
+                            </svg>
+                        </div>
+                        <div class="stock-performance-header">
+                            <div class="stock-name-code">
+                                <h4>药明康德</h4>
+                                <div class="suggested-date">推荐日: 2024/11/20</div>
+                            </div>
+                            <div class="total-return positive">+28.3%</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-label">平均日涨幅</div>
+                                <div class="metric-value positive">+0.43%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">年化收益率</div>
+                                <div class="metric-value positive">+156%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-card" onclick="window.location.href='stock-detail.html?code=000333'">
+                        <div class="stock-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="grad4" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- 背景网格 -->
+                                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                                <!-- K线走势图 - 美的集团 -->
+                                <path d="M0,95 L20,90 L40,85 L60,90 L80,80 L100,75 L120,70 L140,65 L160,60 L180,55 L200,50 L220,45 L240,48" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                <path d="M0,95 L20,90 L40,85 L60,90 L80,80 L100,75 L120,70 L140,65 L160,60 L180,55 L200,50 L220,45 L240,48 L240,120 L0,120 Z" fill="url(#grad4)"/>
+                            </svg>
+                        </div>
+                        <div class="stock-performance-header">
+                            <div class="stock-name-code">
+                                <h4>美的集团</h4>
+                                <div class="suggested-date">推荐日: 2025/01/28</div>
+                            </div>
+                            <div class="total-return positive">+24.9%</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-label">平均日涨幅</div>
+                                <div class="metric-value positive">+0.39%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">年化收益率</div>
+                                <div class="metric-value positive">+142%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-card" onclick="window.location.href='stock-detail.html?code=601012'">
+                        <div class="stock-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="grad5" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- 背景网格 -->
+                                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                                <!-- K线走势图 - 隆基绿能 -->
+                                <path d="M0,85 L20,80 L40,75 L60,78 L80,70 L100,65 L120,70 L140,60 L160,55 L180,45 L200,40 L220,42 L240,35" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                <path d="M0,85 L20,80 L40,75 L60,78 L80,70 L100,65 L120,70 L140,60 L160,55 L180,45 L200,40 L220,42 L240,35 L240,120 L0,120 Z" fill="url(#grad5)"/>
+                            </svg>
+                        </div>
+                        <div class="stock-performance-header">
+                            <div class="stock-name-code">
+                                <h4>隆基绿能</h4>
+                                <div class="suggested-date">推荐日: 2024/12/10</div>
+                            </div>
+                            <div class="total-return positive">+22.7%</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-label">平均日涨幅</div>
+                                <div class="metric-value positive">+0.36%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">年化收益率</div>
+                                <div class="metric-value positive">+136%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-card" onclick="window.location.href='stock-detail.html?code=600887'">
+                        <div class="stock-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="grad6" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- 背景网格 -->
+                                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                                <!-- K线走势图 - 伊利股份 -->
+                                <path d="M0,92 L20,90 L40,85 L60,83 L80,80 L100,75 L120,78 L140,72 L160,68 L180,65 L200,60 L220,55 L240,52" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                <path d="M0,92 L20,90 L40,85 L60,83 L80,80 L100,75 L120,78 L140,72 L160,68 L180,65 L200,60 L220,55 L240,52 L240,120 L0,120 Z" fill="url(#grad6)"/>
+                            </svg>
+                        </div>
+                        <div class="stock-performance-header">
+                            <div class="stock-name-code">
+                                <h4>伊利股份</h4>
+                                <div class="suggested-date">推荐日: 2025/02/22</div>
+                            </div>
+                            <div class="total-return positive">+19.8%</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-label">平均日涨幅</div>
+                                <div class="metric-value positive">+0.33%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">年化收益率</div>
+                                <div class="metric-value positive">+129%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stock-spotlight card">
+                <h2>焦点股票提示 STOCK SPOTLIGHT</h2>
+                <div class="stock-spotlight-cards">
+                    <!-- 股票1 -->
+                    <div class="spotlight-card" onclick="window.location.href='stock-detail.html?code=600519'">
+                        <div class="spotlight-header">
+                            <div class="stock-info-primary">
+                                <div class="stock-title">
+                                    <span class="stock-name">贵州茅台</span>
+                                    <span class="stock-code">600519</span>
+                                </div>
+                                <div class="price-info">
+                                    <span class="price">¥1,832.00</span>
+                                    <span class="change positive">+3.6%</span>
+                                </div>
+                            </div>
+                            <div class="stock-chart-small">
+                                <svg width="100%" height="100%" viewBox="0 0 200 80" preserveAspectRatio="none">
+                                    <defs>
+                                        <linearGradient id="spotGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <line x1="0" y1="20" x2="200" y2="20" stroke="#f0f0f0" stroke-width="1"/>
+                                    <line x1="0" y1="40" x2="200" y2="40" stroke="#f0f0f0" stroke-width="1"/>
+                                    <line x1="0" y1="60" x2="200" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                    <path d="M0,60 L20,58 L40,55 L60,50 L80,52 L100,45 L120,40 L140,35 L160,30 L180,25 L200,20" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                    <path d="M0,60 L20,58 L40,55 L60,50 L80,52 L100,45 L120,40 L140,35 L160,30 L180,25 L200,20 L200,80 L0,80 Z" fill="url(#spotGrad1)"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="recommendation-reason">
+                            <div class="reason-title">财报超预期</div>
+                            <p>2025年Q1营收同比增长18.6%，净利润增长21.3%，均显著超出市场预期。高端酒销量环比提升25%，渠道库存维持健康水平，产品结构持续优化。</p>
+                        </div>
+                        <div class="spotlight-footer">
+                            <div class="recommendation-index">
+                                <span>推荐指数:</span>
+                                <div class="stars">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                </div>
+                            </div>
+                            <div class="view-report">
+                                <span>点击可查看完整研究报告</span>
+                                <span>›</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 股票2 -->
+                    <div class="spotlight-card" onclick="window.location.href='stock-detail.html?code=688981'">
+                        <div class="spotlight-header">
+                            <div class="stock-info-primary">
+                                <div class="stock-title">
+                                    <span class="stock-name">中芯国际</span>
+                                    <span class="stock-code">688981</span>
+                                </div>
+                                <div class="price-info">
+                                    <span class="price">¥56.75</span>
+                                    <span class="change positive">+4.2%</span>
+                                </div>
+                            </div>
+                            <div class="stock-chart-small">
+                                <svg width="100%" height="100%" viewBox="0 0 200 80" preserveAspectRatio="none">
+                                    <defs>
+                                        <linearGradient id="spotGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <line x1="0" y1="20" x2="200" y2="20" stroke="#f0f0f0" stroke-width="1"/>
+                                    <line x1="0" y1="40" x2="200" y2="40" stroke="#f0f0f0" stroke-width="1"/>
+                                    <line x1="0" y1="60" x2="200" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                    <path d="M0,65 L20,60 L40,62 L60,58 L80,55 L100,60 L120,50 L140,45 L160,40 L180,30 L200,25" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                    <path d="M0,65 L20,60 L40,62 L60,58 L80,55 L100,60 L120,50 L140,45 L160,40 L180,30 L200,25 L200,80 L0,80 Z" fill="url(#spotGrad2)"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="recommendation-reason">
+                            <div class="reason-title">技术突破与国产化替代</div>
+                            <p>公司成功量产7nm制程芯片，技术能力获突破性进展。在政策支持和国产化替代加速背景下，订单能见度高，产能利用率维持满载状态，预计未来两年收入复合增长率超过30%。</p>
+                        </div>
+                        <div class="spotlight-footer">
+                            <div class="recommendation-index">
+                                <span>推荐指数:</span>
+                                <div class="stars">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star" style="color:#e8e8e8">★</span>
+                                </div>
+                            </div>
+                            <div class="view-report">
+                                <span>点击可查看完整研究报告</span>
+                                <span>›</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 股票3 -->
+                    <div class="spotlight-card" onclick="window.location.href='stock-detail.html?code=300750'">
+                        <div class="spotlight-header">
+                            <div class="stock-info-primary">
+                                <div class="stock-title">
+                                    <span class="stock-name">宁德时代</span>
+                                    <span class="stock-code">300750</span>
+                                </div>
+                                <div class="price-info">
+                                    <span class="price">¥187.28</span>
+                                    <span class="change positive">+2.8%</span>
+                                </div>
+                            </div>
+                            <div class="stock-chart-small">
+                                <svg width="100%" height="100%" viewBox="0 0 200 80" preserveAspectRatio="none">
+                                    <defs>
+                                        <linearGradient id="spotGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <line x1="0" y1="20" x2="200" y2="20" stroke="#f0f0f0" stroke-width="1"/>
+                                    <line x1="0" y1="40" x2="200" y2="40" stroke="#f0f0f0" stroke-width="1"/>
+                                    <line x1="0" y1="60" x2="200" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                                    <path d="M0,55 L20,50 L40,45 L60,48 L80,45 L100,40 L120,38 L140,42 L160,35 L180,30 L200,25" stroke="#52c41a" stroke-width="2" fill="none"/>
+                                    <path d="M0,55 L20,50 L40,45 L60,48 L80,45 L100,40 L120,38 L140,42 L160,35 L180,30 L200,25 L200,80 L0,80 Z" fill="url(#spotGrad3)"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="recommendation-reason">
+                            <div class="reason-title">钠离子电池创新与海外业务增长</div>
+                            <p>公司钠离子电池技术获重大突破，能量密度提升25%，成本降低30%。同时，海外市场份额显著提升，与多家欧美整车厂签订长期供应协议，未来三年确定性订单金额超过2000亿元。</p>
+                        </div>
+                        <div class="spotlight-footer">
+                            <div class="recommendation-index">
+                                <span>推荐指数:</span>
+                                <div class="stars">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star" style="color:#e8e8e8">★</span>
+                                    <span class="star" style="color:#e8e8e8">★</span>
+                                </div>
+                            </div>
+                            <div class="view-report">
+                                <span>点击可查看完整研究报告</span>
+                                <span>›</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="fundamental-signals card">
+                <h2>基本面或舆情信号提示 FUNDAMENTAL SIGNALS</h2>
+                
+                <div class="fundamental-signals-container">
+                    <div class="signal-category">
+                        <h3>财报超预期</h3>
+                        <div class="fundamental-signals">
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600809</span>
+                                    <span class="stock-name">山西汾酒</span>
+                                </div>
+                                <p class="sentiment-reason">季度营收同比增长28.5%，净利润增长32.3%，均超市场预期</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">预期差异: <span class="value positive">+15.6%</span></span>
+                                </div>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600276</span>
+                                    <span class="stock-name">恒瑞医药</span>
+                                </div>
+                                <p class="sentiment-reason">研发投入和新产品销售额双双超预期</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">预期差异: <span class="value positive">+8.2%</span></span>
+                                </div>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-negative">负面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">000002</span>
+                                    <span class="stock-name">万科A</span>
+                                </div>
+                                <p class="sentiment-reason">季度净利润同比下降18.7%，低于市场预期</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">预期差异: <span class="value negative">-10.2%</span></span>
+                                </div>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-negative">负面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600028</span>
+                                    <span class="stock-name">中国石化</span>
+                                </div>
+                                <p class="sentiment-reason">炼油业务低于预期，库存损失较大</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">预期差异: <span class="value negative">-7.5%</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-category">
+                        <h3>分析师评级变动</h3>
+                        <div class="fundamental-signals">
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">上调</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">002594</span>
+                                    <span class="stock-name">比亚迪</span>
+                                </div>
+                                <p class="sentiment-reason">多家机构上调评级至"买入"，看好其新能源领域增长</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">目标价: <span class="value">¥320.00</span></span>
+                                </div>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">上调</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600690</span>
+                                    <span class="stock-name">海尔智家</span>
+                                </div>
+                                <p class="sentiment-reason">国际业务扩张顺利，评级上调</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">目标价: <span class="value">¥42.80</span></span>
+                                </div>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-negative">下调</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">601318</span>
+                                    <span class="stock-name">中国平安</span>
+                                </div>
+                                <p class="sentiment-reason">两家机构下调评级至"中性"，担忧保险业务增长放缓</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">目标价: <span class="value">¥48.50</span></span>
+                                </div>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-negative">下调</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600019</span>
+                                    <span class="stock-name">宝钢股份</span>
+                                </div>
+                                <p class="sentiment-reason">钢材价格承压，盈利能力受质疑</p>
+                                <div class="sentiment-metrics">
+                                    <span class="metric">目标价: <span class="value">¥5.80</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-category">
+                        <h3>重要消息或舆情</h3>
+                        <div class="fundamental-signals">
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600031</span>
+                                    <span class="stock-name">三一重工</span>
+                                </div>
+                                <p class="sentiment-reason">获得海外重大工程机械订单，合同总额约30亿元</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">601899</span>
+                                    <span class="stock-name">紫金矿业</span>
+                                </div>
+                                <p class="sentiment-reason">成功收购海外优质矿产资源，提升储量</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-negative">负面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">601628</span>
+                                    <span class="stock-name">中国人寿</span>
+                                </div>
+                                <p class="sentiment-reason">核心高管离职，市场担忧战略连续性</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-negative">负面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">601088</span>
+                                    <span class="stock-name">中国神华</span>
+                                </div>
+                                <p class="sentiment-reason">环保政策趋严，可能影响产能释放</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">688981</span>
+                                    <span class="stock-name">中芯国际</span>
+                                </div>
+                                <p class="sentiment-reason">新工艺研发取得突破，技术水平获业内认可</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="view-more">
+                    <a href="#" class="btn">👉 查看更多基本面与舆情信号</a>
+                </div>
+            </section>
+
+            <section class="technical-signals card">
+                <h2>技术信号提示 TECHNICAL SIGNALS</h2>
+                <div class="technical-signals-container">
+                    <div class="signal-column buy-signals">
+                        <h3>买入信号</h3>
+                        <div class="signal-groups">
+                            <div class="signal-group">
+                                <h4>
+                                    突破上升通道 (5支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            当股票价格突破上升通道时，表明上升趋势得到确认，价格可能会继续上涨。这是一个强烈的买入信号，尤其是当成交量同步增加时。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=600519" class="stock-tag">贵州茅台 <span class="stock-code">600519</span></a>
+                                    <a href="stock-detail.html?code=601318" class="stock-tag">中国平安 <span class="stock-code">601318</span></a>
+                                    <a href="stock-detail.html?code=600887" class="stock-tag">伊利股份 <span class="stock-code">600887</span></a>
+                                    <a href="stock-detail.html?code=601888" class="stock-tag">中国中免 <span class="stock-code">601888</span></a>
+                                    <a href="stock-detail.html?code=600309" class="stock-tag">万华化学 <span class="stock-code">600309</span></a>
+                                </div>
+                            </div>
+                            <div class="signal-group">
+                                <h4>
+                                    金叉形成 (8支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            金叉形成是指短期均线（如5日均线）从下方穿越长期均线（如20日均线）。这通常表明股票动量转为正向，是一个经典的技术买入信号。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=600276" class="stock-tag">恒瑞医药 <span class="stock-code">600276</span></a>
+                                    <a href="stock-detail.html?code=000333" class="stock-tag">美的集团 <span class="stock-code">000333</span></a>
+                                    <a href="stock-detail.html?code=600036" class="stock-tag">招商银行 <span class="stock-code">600036</span></a>
+                                    <a href="stock-detail.html?code=600031" class="stock-tag">三一重工 <span class="stock-code">600031</span></a>
+                                    <a href="stock-detail.html?code=more" class="stock-tag more">+4</a>
+                                </div>
+                            </div>
+                            <div class="signal-group">
+                                <h4>
+                                    放量上涨 (12支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            放量上涨指股价上涨的同时，成交量明显增加。这表明买入力量强劲，通常预示着上涨趋势可能持续。成交量是价格变动的确认指标。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=601012" class="stock-tag">隆基绿能 <span class="stock-code">601012</span></a>
+                                    <a href="stock-detail.html?code=688981" class="stock-tag">中芯国际 <span class="stock-code">688981</span></a>
+                                    <a href="stock-detail.html?code=002594" class="stock-tag">比亚迪 <span class="stock-code">002594</span></a>
+                                    <a href="stock-detail.html?code=600406" class="stock-tag">国电南瑞 <span class="stock-code">600406</span></a>
+                                    <a href="stock-detail.html?code=more" class="stock-tag more">+8</a>
+                                </div>
+                            </div>
+                            <div class="signal-group">
+                                <h4>
+                                    MACD底部拐头 (7支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            MACD指标在底部区域由负转正，柱状图从下方向上拐头，表明股票可能已经触底并开始反弹。这是较为可靠的中长期买入信号。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=300750" class="stock-tag">宁德时代 <span class="stock-code">300750</span></a>
+                                    <a href="stock-detail.html?code=600989" class="stock-tag">宝丰能源 <span class="stock-code">600989</span></a>
+                                    <a href="stock-detail.html?code=603259" class="stock-tag">药明康德 <span class="stock-code">603259</span></a>
+                                    <a href="stock-detail.html?code=more" class="stock-tag more">+4</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-column sell-signals">
+                        <h3>卖出信号</h3>
+                        <div class="signal-groups">
+                            <div class="signal-group">
+                                <h4>
+                                    跌破支撑位 (4支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            股价跌破重要支撑位，如前期低点或关键均线，表明下跌趋势可能加速。这是一个重要的卖出信号，尤其是在成交量放大的情况下。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=000002" class="stock-tag">万科A <span class="stock-code">000002</span></a>
+                                    <a href="stock-detail.html?code=600028" class="stock-tag">中国石化 <span class="stock-code">600028</span></a>
+                                    <a href="stock-detail.html?code=601628" class="stock-tag">中国人寿 <span class="stock-code">601628</span></a>
+                                    <a href="stock-detail.html?code=601088" class="stock-tag">中国神华 <span class="stock-code">601088</span></a>
+                                </div>
+                            </div>
+                            <div class="signal-group">
+                                <h4>
+                                    死叉形成 (6支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            死叉是指短期均线（如5日均线）从上方穿越长期均线（如20日均线）向下。这通常预示着股票动量由正转负，是较为明确的卖出信号。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=601618" class="stock-tag">中国中冶 <span class="stock-code">601618</span></a>
+                                    <a href="stock-detail.html?code=600019" class="stock-tag">宝钢股份 <span class="stock-code">600019</span></a>
+                                    <a href="stock-detail.html?code=601186" class="stock-tag">中国铁建 <span class="stock-code">601186</span></a>
+                                    <a href="stock-detail.html?code=more" class="stock-tag more">+3</a>
+                                </div>
+                            </div>
+                            <div class="signal-group">
+                                <h4>
+                                    量能萎缩 (9支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            股价上涨但成交量逐渐减少，表明上涨动能不足，买盘力量减弱。这种"价升量缩"的情况常常是市场即将见顶的信号，建议考虑逢高减仓。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=601668" class="stock-tag">中国建筑 <span class="stock-code">601668</span></a>
+                                    <a href="stock-detail.html?code=600050" class="stock-tag">中国联通 <span class="stock-code">600050</span></a>
+                                    <a href="stock-detail.html?code=601857" class="stock-tag">中国石油 <span class="stock-code">601857</span></a>
+                                    <a href="stock-detail.html?code=more" class="stock-tag more">+6</a>
+                                </div>
+                            </div>
+                            <div class="signal-group">
+                                <h4>
+                                    KDJ超买区 (5支)
+                                    <div class="help-icon">?
+                                        <div class="help-tooltip">
+                                            KDJ指标进入超买区（通常K、D、J值都高于80），表明股票可能已被过度买入，短期内存在回调风险。当J线开始向下拐头时，卖出信号更为明确。
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="stock-tags">
+                                    <a href="stock-detail.html?code=000651" class="stock-tag">格力电器 <span class="stock-code">000651</span></a>
+                                    <a href="stock-detail.html?code=601899" class="stock-tag">紫金矿业 <span class="stock-code">601899</span></a>
+                                    <a href="stock-detail.html?code=600111" class="stock-tag">北方稀土 <span class="stock-code">600111</span></a>
+                                    <a href="stock-detail.html?code=more" class="stock-tag more">+2</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-more">
+                    <a href="#" class="btn">👉 查看完整技术信号股票列表</a>
+                </div>
+            </section>
+
+            <section class="premium-content card">
+                <h2>付费会员专享 PREMIUM CONTENT</h2>
+                <div class="premium-content-grid">
+                    <div class="premium-item">
+                        <h3>投资组合调整建议</h3>
+                        <p>基于最新市场动态的投资组合优化建议</p>
+                        <span class="premium-badge">会员专享</span>
+                    </div>
+                    <div class="premium-item">
+                        <h3>行业深度分析</h3>
+                        <p>半导体产业链全景图</p>
+                        <span class="premium-badge">会员专享</span>
+                    </div>
+                    <div class="premium-item">
+                        <h3>量化模型精选股票池</h3>
+                        <p>32支经过量化模型筛选的优质股票</p>
+                        <span class="premium-badge">会员专享</span>
+                    </div>
+                    <div class="premium-item">
+                        <h3>本周行业轮动策略</h3>
+                        <p>基于行业景气度和资金流向的轮动策略</p>
+                        <span class="premium-badge">会员专享</span>
+                    </div>
+                </div>
+                <div class="subscribe-cta">
+                    <a href="#" class="btn btn-primary">开通会员服务</a>
+                    <a href="#" class="btn btn-secondary">查看会员权益</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">查看更多历史报告</a>
+                    <a href="#">设置推送方式</a>
+                    <a href="#">订阅会员服务</a>
+                    <a href="#">联系我们</a>
+                </div>
+                <div class="footer-apps">
+                    <span>关注我们:</span>
+                    <a href="#" class="app-icon wechat"></a>
+                    <a href="#" class="app-icon qq"></a>
+                    <a href="#" class="app-icon email"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.top-list-tabs .tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    // Show the selected tab content
+                    if (index === 0) {
+                        document.getElementById('limit-up-content').style.display = 'block';
+                    } else {
+                        document.getElementById('longhu-content').style.display = 'block';
+                    }
+                });
+            });
+            
+            // Performance sorting functionality
+            const performanceSort = document.getElementById('performance-sort');
+            if (performanceSort) {
+                performanceSort.addEventListener('change', function() {
+                    // In a real implementation, this would reorder the cards
+                    // based on the selected sort option
+                    console.log('Sort changed to: ' + this.value);
+                    
+                    // Simulate reordering with a page refresh
+                    // In production, this would use AJAX or DOM manipulation
+                    // to avoid a full page reload
+                    // window.location.href = window.location.href.split('?')[0] + '?sort=' + this.value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
