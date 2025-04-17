@@ -257,34 +257,45 @@
         
         /* Fundamental Signals */
         .fundamental-signals-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            display: flex; /* 恢复为 flex 布局 */
+            flex-direction: column; /* 设置为纵向排列 */
+            gap: 20px; /* 保持类别之间的间距 */
+            /* margin-top: 20px; 移除，h2自带margin */
         }
         
+        /* 修改signal-category样式 */
         .signal-category {
             margin-bottom: 0;
             background-color: #fafafa;
             border: 1px solid var(--border-color);
             border-radius: var(--card-radius);
-            padding: 15px;
+            padding: 20px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            width: 100%; /* 恢复宽度，使其在纵向排列时占满 */
         }
         
+        /* 修改signal-category中的h3标题样式 */
         .signal-category h3 {
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 15px;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--primary-color);
+            text-align: left;
+            color: var(--text-color);
             font-weight: 600;
+            width: 100%;
+            display: block;
         }
         
+        /* 修改fundamental-signals样式，保留横向滚动 */
         .fundamental-signals {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            gap: 15px;
+            
+            
+            margin-top: 15px;
+            
         }
         
         .fundamental-card {
@@ -292,6 +303,15 @@
             border-radius: 4px;
             padding: 12px;
             background-color: white;
+            
+            
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .fundamental-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
         
         .signal-label {
@@ -779,6 +799,121 @@
             background-color: #f5f5f5;
             color: var(--secondary-text);
         }
+        
+        /* 添加收藏区样式 */
+        .watchlist-section {
+            margin-bottom: 20px;
+        }
+        
+        .watchlist-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .watchlist-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background-color: white;
+            position: relative;
+        }
+        
+        .watchlist-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* 使收藏区卡片样式与性能卡片一致 */
+        .watchlist-card .stock-chart {
+            width: 100%;
+            height: 120px;
+            background-color: #fafafa;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .watchlist-card .stock-performance-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .watchlist-card .stock-name-code h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .watchlist-card .suggested-date {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+        
+        .watchlist-card .total-return {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .watchlist-card .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .watchlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .watchlist-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .watchlist-count {
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+        
+        .watchlist-empty {
+            text-align: center;
+            padding: 30px;
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+        
+        /* 收藏图标样式 */
+        .watch-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            color: var(--secondary-text);
+            transition: color 0.3s, fill 0.3s;
+            z-index: 10;
+        }
+        
+        .watch-icon.active {
+            color: #f5222d; /* 使用红色作为收藏颜色 */
+            fill: #f5222d;
+        }
+        
+        .watch-icon:hover {
+            color: #f5222d;
+        }
+        
+        .performance-card, .spotlight-card {
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -803,6 +938,17 @@
 
     <main class="dashboard-content">
         <div class="container">
+            <!-- 添加收藏区 -->
+            <section class="watchlist-section card">
+                <div class="watchlist-header">
+                    <h2>我的收藏 MY WATCHLIST</h2>
+                    <div class="watchlist-count">已收藏: <span id="watchlist-count">0</span>/9</div>
+                </div>
+                <div class="watchlist-cards" id="watchlist-cards">
+                    <div class="watchlist-empty" id="watchlist-empty">点击股票卡片上的收藏图标，将股票添加到收藏区</div>
+                </div>
+            </section>
+            
             <section class="market-overview card">
                 <h2>市场概览 MARKET OVERVIEW</h2>
                 <div class="indices-row">
@@ -833,7 +979,7 @@
             </section>
 
             <section class="performance-history card">
-                <h2>历史推荐表现最佳股票 BEST PERFORMING STOCKS</h2>
+                <h2>历史提示股票表现 HISTORICAL STOCK PERFORMANCE</h2>
                 <div class="performance-header">
                     <div class="sort-select">
                         <span>排名方式:</span>
@@ -846,6 +992,9 @@
                 </div>
                 <div class="performance-cards">
                     <div class="performance-card" onclick="window.location.href='stock-detail.html?code=600519'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('600519', '贵州茅台', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="stock-chart">
                             <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
                                 <defs>
@@ -883,6 +1032,9 @@
                     </div>
                     
                     <div class="performance-card" onclick="window.location.href='stock-detail.html?code=300750'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('300750', '宁德时代', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="stock-chart">
                             <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
                                 <defs>
@@ -920,6 +1072,9 @@
                     </div>
                     
                     <div class="performance-card" onclick="window.location.href='stock-detail.html?code=603259'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('603259', '药明康德', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="stock-chart">
                             <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
                                 <defs>
@@ -957,6 +1112,9 @@
                     </div>
                     
                     <div class="performance-card" onclick="window.location.href='stock-detail.html?code=000333'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('000333', '美的集团', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="stock-chart">
                             <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
                                 <defs>
@@ -994,6 +1152,9 @@
                     </div>
                     
                     <div class="performance-card" onclick="window.location.href='stock-detail.html?code=601012'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('601012', '隆基绿能', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="stock-chart">
                             <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
                                 <defs>
@@ -1031,6 +1192,9 @@
                     </div>
                     
                     <div class="performance-card" onclick="window.location.href='stock-detail.html?code=600887'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('600887', '伊利股份', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="stock-chart">
                             <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
                                 <defs>
@@ -1074,6 +1238,9 @@
                 <div class="stock-spotlight-cards">
                     <!-- 股票1 -->
                     <div class="spotlight-card" onclick="window.location.href='stock-detail.html?code=600519'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('600519', '贵州茅台', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="spotlight-header">
                             <div class="stock-info-primary">
                                 <div class="stock-title">
@@ -1130,6 +1297,9 @@
                     
                     <!-- 股票2 -->
                     <div class="spotlight-card" onclick="window.location.href='stock-detail.html?code=688981'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('688981', '中芯国际', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="spotlight-header">
                             <div class="stock-info-primary">
                                 <div class="stock-title">
@@ -1186,6 +1356,9 @@
                     
                     <!-- 股票3 -->
                     <div class="spotlight-card" onclick="window.location.href='stock-detail.html?code=300750'">
+                        <svg class="watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation(); toggleWatchlist('300750', '宁德时代', this)">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
                         <div class="spotlight-header">
                             <div class="stock-info-primary">
                                 <div class="stock-title">
@@ -1242,9 +1415,8 @@
                 </div>
             </section>
 
-            <section class="fundamental-signals card">
+            <section class="card">
                 <h2>基本面或舆情信号提示 FUNDAMENTAL SIGNALS</h2>
-                
                 <div class="fundamental-signals-container">
                     <div class="signal-category">
                         <h3>财报超预期</h3>
@@ -1252,13 +1424,78 @@
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
                                 <div class="stock-info">
+                                    <span class="stock-code">600519</span>
+                                    <span class="stock-name">贵州茅台</span>
+                                </div>
+                                <p class="sentiment-reason">Q1营收和利润均超预期增长</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">300750</span>
+                                    <span class="stock-name">宁德时代</span>
+                                </div>
+                                <p class="sentiment-reason">年度净利润大幅增长，市场份额提升</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">002475</span>
+                                    <span class="stock-name">立讯精密</span>
+                                </div>
+                                <p class="sentiment-reason">季度营收强劲，超市场预期</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-category">
+                        <h3>分析师上调评级</h3>
+                        <div class="fundamental-signals">
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">上调</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">601012</span>
+                                    <span class="stock-name">隆基绿能</span>
+                                </div>
+                                <p class="sentiment-reason">多家券商上调评级至"买入"，看好光伏需求</p>
+                            </div>
+                             <div class="fundamental-card">
+                                <span class="signal-label signal-positive">上调</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">600036</span>
+                                    <span class="stock-name">招商银行</span>
+                                </div>
+                                <p class="sentiment-reason">估值修复，多家机构上调目标价</p>
+                            </div>
+                             <div class="fundamental-card">
+                                <span class="signal-label signal-positive">上调</span>
+                                <div class="stock-info">
                                     <span class="stock-code">600809</span>
                                     <span class="stock-name">山西汾酒</span>
                                 </div>
-                                <p class="sentiment-reason">季度营收同比增长28.5%，净利润增长32.3%，均超市场预期</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">预期差异: <span class="value positive">+15.6%</span></span>
+                                <p class="sentiment-reason">高端化进程顺利，机构看好长期增长</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-category">
+                        <h3>重要利好新闻</h3>
+                        <div class="fundamental-signals">
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">688981</span>
+                                    <span class="stock-name">中芯国际</span>
                                 </div>
+                                <p class="sentiment-reason">获得国家大基金三期注资，加速产能扩张</p>
+                            </div>
+                            <div class="fundamental-card">
+                                <span class="signal-label signal-positive">正面</span>
+                                <div class="stock-info">
+                                    <span class="stock-code">000333</span>
+                                    <span class="stock-name">美的集团</span>
+                                </div>
+                                <p class="sentiment-reason">宣布重大资产重组，拟收购工业自动化龙头</p>
                             </div>
                             <div class="fundamental-card">
                                 <span class="signal-label signal-positive">正面</span>
@@ -1266,135 +1503,10 @@
                                     <span class="stock-code">600276</span>
                                     <span class="stock-name">恒瑞医药</span>
                                 </div>
-                                <p class="sentiment-reason">研发投入和新产品销售额双双超预期</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">预期差异: <span class="value positive">+8.2%</span></span>
-                                </div>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-negative">负面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">000002</span>
-                                    <span class="stock-name">万科A</span>
-                                </div>
-                                <p class="sentiment-reason">季度净利润同比下降18.7%，低于市场预期</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">预期差异: <span class="value negative">-10.2%</span></span>
-                                </div>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-negative">负面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">600028</span>
-                                    <span class="stock-name">中国石化</span>
-                                </div>
-                                <p class="sentiment-reason">炼油业务低于预期，库存损失较大</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">预期差异: <span class="value negative">-7.5%</span></span>
-                                </div>
+                                <p class="sentiment-reason">创新药获得美国FDA批准上市</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="signal-category">
-                        <h3>分析师评级变动</h3>
-                        <div class="fundamental-signals">
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-positive">上调</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">002594</span>
-                                    <span class="stock-name">比亚迪</span>
-                                </div>
-                                <p class="sentiment-reason">多家机构上调评级至"买入"，看好其新能源领域增长</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">目标价: <span class="value">¥320.00</span></span>
-                                </div>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-positive">上调</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">600690</span>
-                                    <span class="stock-name">海尔智家</span>
-                                </div>
-                                <p class="sentiment-reason">国际业务扩张顺利，评级上调</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">目标价: <span class="value">¥42.80</span></span>
-                                </div>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-negative">下调</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">601318</span>
-                                    <span class="stock-name">中国平安</span>
-                                </div>
-                                <p class="sentiment-reason">两家机构下调评级至"中性"，担忧保险业务增长放缓</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">目标价: <span class="value">¥48.50</span></span>
-                                </div>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-negative">下调</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">600019</span>
-                                    <span class="stock-name">宝钢股份</span>
-                                </div>
-                                <p class="sentiment-reason">钢材价格承压，盈利能力受质疑</p>
-                                <div class="sentiment-metrics">
-                                    <span class="metric">目标价: <span class="value">¥5.80</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="signal-category">
-                        <h3>重要消息或舆情</h3>
-                        <div class="fundamental-signals">
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-positive">正面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">600031</span>
-                                    <span class="stock-name">三一重工</span>
-                                </div>
-                                <p class="sentiment-reason">获得海外重大工程机械订单，合同总额约30亿元</p>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-positive">正面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">601899</span>
-                                    <span class="stock-name">紫金矿业</span>
-                                </div>
-                                <p class="sentiment-reason">成功收购海外优质矿产资源，提升储量</p>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-negative">负面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">601628</span>
-                                    <span class="stock-name">中国人寿</span>
-                                </div>
-                                <p class="sentiment-reason">核心高管离职，市场担忧战略连续性</p>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-negative">负面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">601088</span>
-                                    <span class="stock-name">中国神华</span>
-                                </div>
-                                <p class="sentiment-reason">环保政策趋严，可能影响产能释放</p>
-                            </div>
-                            <div class="fundamental-card">
-                                <span class="signal-label signal-positive">正面</span>
-                                <div class="stock-info">
-                                    <span class="stock-code">688981</span>
-                                    <span class="stock-name">中芯国际</span>
-                                </div>
-                                <p class="sentiment-reason">新工艺研发取得突破，技术水平获业内认可</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="view-more">
-                    <a href="#" class="btn">👉 查看更多基本面与舆情信号</a>
                 </div>
             </section>
 
@@ -1641,6 +1753,153 @@
                     // window.location.href = window.location.href.split('?')[0] + '?sort=' + this.value;
                 });
             }
+        });
+    </script>
+
+    <script>
+        // 添加收藏功能相关代码
+        const watchlist = new Set();
+        const maxWatchlistSize = 9;
+        
+        function toggleWatchlist(code, name, icon) {
+            const card = icon.closest('.performance-card, .spotlight-card, .watchlist-card');
+            const isInWatchlist = watchlist.has(code);
+            
+            if (isInWatchlist) {
+                watchlist.delete(code);
+                
+                // 将所有相同代码的图标更新为未收藏状态
+                document.querySelectorAll('.watch-icon').forEach(starIcon => {
+                    if (starIcon.getAttribute('data-code') === code) {
+                        starIcon.classList.remove('active');
+                        starIcon.setAttribute('fill', 'none');
+                    }
+                });
+                
+                removeFromWatchlist(code);
+            } else {
+                if (watchlist.size >= maxWatchlistSize) {
+                    alert('收藏夹已满，最多可收藏9只股票');
+                    return;
+                }
+                
+                watchlist.add(code);
+                
+                // 将所有相同代码的图标更新为收藏状态
+                document.querySelectorAll('.watch-icon').forEach(starIcon => {
+                    if (starIcon.getAttribute('data-code') === code) {
+                        starIcon.classList.add('active');
+                        starIcon.setAttribute('fill', 'currentColor');
+                    }
+                });
+                
+                addToWatchlist(code, name, card);
+            }
+            
+            updateWatchlistCount();
+        }
+        
+        function addToWatchlist(code, name, sourceCard) {
+            const watchlistCards = document.getElementById('watchlist-cards');
+            const emptyMessage = document.getElementById('watchlist-empty');
+            
+            if (emptyMessage) {
+                emptyMessage.remove();
+            }
+            
+            const card = document.createElement('div');
+            card.className = 'watchlist-card';
+            card.setAttribute('onclick', `window.location.href='stock-detail.html?code=${code}'`);
+            
+            // 创建一个完全与原卡片相同风格的复制品
+            card.innerHTML = `
+                <svg class="watch-icon active" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" data-code="${code}" onclick="event.stopPropagation(); toggleWatchlist('${code}', '${name}', this)">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <div class="stock-chart">
+                    ${sourceCard.querySelector('.stock-chart').innerHTML}
+                </div>
+                <div class="stock-performance-header">
+                    <div class="stock-name-code">
+                        <h4>${name}</h4>
+                        <div class="suggested-date">推荐日: ${sourceCard.querySelector('.suggested-date')?.textContent || '2025/03/28'}</div>
+                    </div>
+                    <div class="total-return positive">${sourceCard.querySelector('.total-return')?.textContent || '+20.5%'}</div>
+                </div>
+                <div class="metrics-grid">
+                    ${sourceCard.querySelector('.metrics-grid').innerHTML}
+                </div>
+            `;
+            
+            watchlistCards.appendChild(card);
+            
+            // 为新添加的收藏图标添加事件监听
+            const watchIcon = card.querySelector('.watch-icon');
+            watchIcon.onclick = (e) => {
+                e.stopPropagation();
+                toggleWatchlist(code, name, watchIcon);
+            };
+        }
+        
+        function removeFromWatchlist(code) {
+            const watchlistCards = document.getElementById('watchlist-cards');
+            // 使用更可靠的选择器找到要删除的卡片
+            const cards = watchlistCards.querySelectorAll('.watchlist-card');
+            let cardToRemove = null;
+            
+            for (const card of cards) {
+                const stockCode = card.querySelector('.stock-name-code')?.textContent.match(/\d+/)?.[0];
+                if (stockCode === code) {
+                    cardToRemove = card;
+                    break;
+                }
+            }
+            
+            if (cardToRemove) {
+                cardToRemove.remove();
+            }
+            
+            if (watchlistCards.children.length === 0) {
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'watchlist-empty';
+                emptyMessage.id = 'watchlist-empty';
+                emptyMessage.textContent = '点击股票卡片上的收藏图标，将股票添加到收藏区';
+                watchlistCards.appendChild(emptyMessage);
+            }
+        }
+        
+        function updateWatchlistCount() {
+            const countElement = document.getElementById('watchlist-count');
+            if (countElement) {
+                countElement.textContent = watchlist.size;
+            }
+        }
+        
+        // 修改原有的DOMContentLoaded事件处理
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing code ...
+            
+            // 为所有股票卡片添加收藏图标
+            document.querySelectorAll('.performance-card, .spotlight-card').forEach(card => {
+                const code = card.getAttribute('onclick').match(/code=(\d+)/)?.[1];
+                const name = card.querySelector('.stock-name, h4').textContent;
+                
+                const icon = document.createElement('svg');
+                icon.className = 'watch-icon';
+                icon.setAttribute('viewBox', '0 0 24 24');
+                icon.setAttribute('fill', 'none'); // 默认为空心
+                icon.setAttribute('stroke', 'currentColor');
+                icon.setAttribute('stroke-width', '2');
+                icon.setAttribute('data-code', code); // 添加股票代码属性，方便后续查找
+                // 心形图标路径
+                icon.innerHTML = '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>';
+                icon.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleWatchlist(code, name, icon);
+                };
+                
+                card.appendChild(icon);
+            });
         });
     </script>
 </body>
