@@ -46,8 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        // 检查是否为顶部标题（每日投资机会速递），如果是则跳过
+        if (card.closest('.main-header') || !card.getAttribute('onclick')) {
+            return;
+        }
+        
         const code = card.getAttribute('onclick').match(/code=(\d+)/)?.[1];
-        const name = card.querySelector('.stock-name, h4').textContent;
+        const name = card.querySelector('.stock-name, h4')?.textContent;
+        
+        if (!code || !name) {
+            return; // 如果没有股票代码或名称，则跳过
+        }
         
         const icon = document.createElement('svg');
         icon.className = 'watch-icon';
@@ -146,7 +155,8 @@ const watchlist = new Set();
 const maxWatchlistSize = 9;
 
 function toggleWatchlist(code, name, icon) {
-    const card = icon.closest('.performance-card, .spotlight-card, .watchlist-card');
+    // 获取源卡片，支持各种不同类型的卡片
+    const card = icon.closest('.performance-card, .spotlight-card, .fundamental-card, .stock-signal-card, .watchlist-card');
     const isInWatchlist = watchlist.has(code);
     
     if (isInWatchlist) {
@@ -195,23 +205,84 @@ function addToWatchlist(code, name, sourceCard) {
     card.className = 'watchlist-card';
     card.setAttribute('onclick', `window.location.href='stock-detail.html?code=${code}'`);
     
-    // 创建一个完全与原卡片相同风格的复制品
+    // 获取股票图表 - 如果没有则使用默认图表
+    let chartHtml = '';
+    if (sourceCard.querySelector('.stock-chart')) {
+        chartHtml = sourceCard.querySelector('.stock-chart').innerHTML;
+    } else if (sourceCard.querySelector('.stock-chart-small')) {
+        // 焦点股票提示使用stock-chart-small
+        chartHtml = sourceCard.querySelector('.stock-chart-small').innerHTML;
+    } else {
+        // 默认图表
+        chartHtml = `
+            <svg width="100%" height="100%" viewBox="0 0 240 120" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="watchlist-grad-${code}" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(82,196,26,0.2);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(82,196,26,0);stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <line x1="0" y1="30" x2="240" y2="30" stroke="#f0f0f0" stroke-width="1"/>
+                <line x1="0" y1="60" x2="240" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                <line x1="0" y1="90" x2="240" y2="90" stroke="#f0f0f0" stroke-width="1"/>
+                <path d="M0,90 L40,85 L80,70 L120,60 L160,50 L200,40 L240,30" stroke="#52c41a" stroke-width="2" fill="none"/>
+                <path d="M0,90 L40,85 L80,70 L120,60 L160,50 L200,40 L240,30 L240,120 L0,120 Z" fill="url(#watchlist-grad-${code})"/>
+            </svg>
+        `;
+    }
+    
+    // 获取收益率或价格变化 - 如果没有则使用默认值
+    let returnText = '+20.5%';
+    if (sourceCard.querySelector('.total-return')) {
+        returnText = sourceCard.querySelector('.total-return').textContent;
+    } else if (sourceCard.querySelector('.stock-change')) {
+        returnText = sourceCard.querySelector('.stock-change').textContent;
+    } else if (sourceCard.querySelector('.price-info .change')) {
+        returnText = sourceCard.querySelector('.price-info .change').textContent;
+    }
+    
+    // 获取推荐日期 - 如果没有则使用当前日期
+    let suggestedDate = '2025/04/18';
+    if (sourceCard.querySelector('.suggested-date')) {
+        suggestedDate = sourceCard.querySelector('.suggested-date').textContent;
+    } else {
+        suggestedDate = `推荐日: ${suggestedDate}`;
+    }
+    
+    // 构建指标网格HTML - 如果原始卡片没有则创建默认指标
+    let metricsHtml = '';
+    if (sourceCard.querySelector('.metrics-grid')) {
+        metricsHtml = sourceCard.querySelector('.metrics-grid').innerHTML;
+    } else {
+        metricsHtml = `
+            <div class="metric">
+                <div class="metric-label">平均日涨幅</div>
+                <div class="metric-value positive">+0.35%</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">年化收益率</div>
+                <div class="metric-value positive">+125%</div>
+            </div>
+        `;
+    }
+    
+    // 创建收藏卡片HTML
     card.innerHTML = `
         <svg class="watch-icon active" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" data-code="${code}" onclick="event.stopPropagation(); toggleWatchlist('${code}', '${name}', this)">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
         <div class="stock-chart">
-            ${sourceCard.querySelector('.stock-chart').innerHTML}
+            ${chartHtml}
         </div>
         <div class="stock-performance-header">
             <div class="stock-name-code">
                 <h4>${name}</h4>
-                <div class="suggested-date">推荐日: ${sourceCard.querySelector('.suggested-date')?.textContent || '2025/03/28'}</div>
+                <div class="suggested-date">${suggestedDate}</div>
             </div>
-            <div class="total-return positive">${sourceCard.querySelector('.total-return')?.textContent || '+20.5%'}</div>
+            <div class="total-return positive">${returnText}</div>
         </div>
         <div class="metrics-grid">
-            ${sourceCard.querySelector('.metrics-grid').innerHTML}
+            ${metricsHtml}
         </div>
     `;
     

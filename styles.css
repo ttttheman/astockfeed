@@ -1022,7 +1022,7 @@ h3 {
     font-size: 14px;
 }
 
-/* 收藏图标样式 */
+/* 收藏图标样式 - 统一所有区域的收藏图标样式 */
 .watch-icon {
     position: absolute;
     top: 15px;
@@ -1033,17 +1033,9 @@ h3 {
     color: #d9d9d9; /* 默认颜色改为浅灰色，确保始终可见 */
     transition: color 0.3s, fill 0.3s;
     z-index: 10;
-    opacity: 1 !important; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
-    visibility: visible !important; /* 确保始终可见，使用!important确保不被其他样式覆盖 */
+    opacity: 1 !important; /* 确保始终可见 */
+    visibility: visible !important; /* 确保始终可见 */
     display: block !important; /* 强制显示 */
-}
-
-/* 明确为基本面卡片中的收藏图标添加样式 */
-.fundamental-card .watch-icon {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-    pointer-events: auto !important;
 }
 
 .watch-icon.active {
@@ -1055,7 +1047,8 @@ h3 {
     color: #f5222d;
 }
 
-.performance-card, .spotlight-card {
+/* 确保各种卡片类型都有相对定位，以便收藏图标能够正确定位 */
+.performance-card, .spotlight-card, .fundamental-card, .stock-signal-card {
     position: relative;
 }
 
