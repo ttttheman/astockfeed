@@ -1035,8 +1035,8 @@ h3 {
     transition: color 0.3s, fill 0.3s;
     z-index: 10;
     opacity: 1 !important; /* 确保始终可见 */
-    visibility: visible !重要; /* 确保始终可见 */
-    display: block !重要; /* 强制显示 */
+    visibility: visible !important; /* 确保始终可见 */
+    display: block !important; /* 强制显示 */
 }
 
 .watch-icon.active {
