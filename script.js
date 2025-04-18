@@ -41,6 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 为所有股票卡片添加收藏图标
     document.querySelectorAll('.performance-card, .spotlight-card').forEach(card => {
+        // 检查卡片是否已经有收藏图标，如果有则跳过
+        if (card.querySelector('.watch-icon')) {
+            return;
+        }
+        
         const code = card.getAttribute('onclick').match(/code=(\d+)/)?.[1];
         const name = card.querySelector('.stock-name, h4').textContent;
         

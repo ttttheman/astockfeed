@@ -1059,25 +1059,6 @@ h3 {
     position: relative;
 }
 
-/* 收藏图标样式 */
-.favorite-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 18px;
-    color: #d9d9d9;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.favorite-icon:hover {
-    color: #faad14;
-}
-
-.favorite-icon.active {
-    color: #faad14;
-}
-
 /* 股票价格和涨幅样式 */
 .stock-price-info {
     display: flex;
