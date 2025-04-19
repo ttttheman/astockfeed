@@ -148,6 +148,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // 新增：确保所有股票价格前面都有¥符号
+    document.querySelectorAll('.stock-price, .price, .stock-current-price').forEach(priceElement => {
+        const priceText = priceElement.textContent.trim();
+        if (!priceText.startsWith('¥') && !isNaN(parseFloat(priceText))) {
+            priceElement.textContent = '¥' + priceText;
+        }
+    });
+    
+    // 修改股票价格和涨幅的颜色样式保持一致
+    document.querySelectorAll('.performance-price-container, .price-info, .stock-price-info').forEach(container => {
+        const changeElement = container.querySelector('.change, .stock-change, .total-return');
+        if (changeElement && changeElement.classList.contains('positive')) {
+            const priceElement = container.querySelector('.price, .stock-price, .stock-current-price');
+            if (priceElement) {
+                priceElement.classList.add('positive');
+            }
+        } else if (changeElement && changeElement.classList.contains('negative')) {
+            const priceElement = container.querySelector('.price, .stock-price, .stock-current-price');
+            if (priceElement) {
+                priceElement.classList.add('negative');
+            }
+        }
+    });
 });
 
 // 添加收藏功能相关代码

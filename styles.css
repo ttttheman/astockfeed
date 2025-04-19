@@ -352,8 +352,8 @@ h3 {
 
 .spotlight-header {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    justify-content: space-between;
     margin-bottom: 15px;
 }
 
@@ -361,6 +361,7 @@ h3 {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    flex: 1;
 }
 
 .stock-title {
@@ -380,11 +381,31 @@ h3 {
 }
 
 .stock-chart-small {
-    width: 200px;
+    width: 150px;
     height: 80px;
     background-color: #fafafa;
     border-radius: 4px;
     overflow: hidden;
+    /* 移除order属性，让K线图回到默认位置（右侧） */
+}
+
+.price-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.price-info .price {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.price-info .change {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 16px; /* 增大字体与价格一致 */
+    font-weight: 600; /* 增加字重与价格一致 */
 }
 
 .recommendation-reason {
@@ -434,6 +455,20 @@ h3 {
 
 .view-report:hover {
     text-decoration: underline;
+}
+
+/* Ensure K-line chart appears on the right in spotlight cards */
+.stock-spotlight-cards .spotlight-header {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+}
+.stock-spotlight-cards .spotlight-header .stock-info-primary {
+    order: 0;
+}
+.stock-spotlight-cards .spotlight-header .stock-chart-small {
+    order: 1;
 }
 
 /* Premium Content */
@@ -1035,8 +1070,8 @@ h3 {
     transition: color 0.3s, fill 0.3s;
     z-index: 10;
     opacity: 1 !important; /* 确保始终可见 */
-    visibility: visible !important; /* 确保始终可见 */
-    display: block !important; /* 强制显示 */
+    visibility: visible !重要; /* 确保始终可见 */
+    display: block !重要; /* 强制显示 */
 }
 
 .watch-icon.active {
@@ -1051,6 +1086,80 @@ h3 {
 /* 确保各种卡片类型都有相对定位，以便收藏图标能够正确定位 */
 .performance-card, .spotlight-card, .fundamental-card, .stock-signal-card {
     position: relative;
+}
+
+/* 股票价格和涨幅样式 */
+.stock-price-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.stock-price {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.stock-change {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stock-change.positive {
+    background-color: rgba(82, 196, 26, 0.1);
+    color: var(--positive-color);
+}
+
+.stock-change.negative {
+    background-color: rgba(245, 34, 45, 0.1);
+    color: var(--negative-color);
+}
+
+/* Performance price and return display */
+.performance-price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stock-current-price {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.total-return {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.total-return.positive {
+    background-color: rgba(82, 196, 26, 0.1);
+}
+
+/* Price info in spotlight cards */
+.price-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.price-info .price {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.price-info .change {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 /* 股票价格和涨幅样式 */
