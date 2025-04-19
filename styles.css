@@ -461,14 +461,17 @@ h3 {
 .stock-spotlight-cards .spotlight-header {
     display: flex;
     flex-direction: row !important;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 10px;  /* Chart sits right next to the name-code section */
 }
 .stock-spotlight-cards .spotlight-header .stock-info-primary {
     order: 0;
+    flex: none; /* limit width to content so chart sits next to it */
 }
 .stock-spotlight-cards .spotlight-header .stock-chart-small {
     order: 1;
+    flex: none; /* chart size fixed and adjacent */
 }
 
 /* Premium Content */
@@ -954,19 +957,19 @@ h3 {
 }
 
 .watch-icon {
-    width: 20px;
-    height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
-    transition: all 0.2s;
-}
-
-.watch-icon:hover {
-    transform: scale(1.2);
-}
-
-.watch-icon.active {
-    fill: #ff4d4f;
-    stroke: #ff4d4f;
+    color: #d9d9d9; /* 默认颜色改为浅灰色，确保始终可见 */
+    transition: color 0.3s, fill 0.3s;
+    z-index: 10;
+    opacity: 1 !important; /* 确保始终可见 */
+    visibility: visible !important; /* 确保始终可见 */
+    display: block !important; /* 强制显示 */
+    fill: none;  /* Ensure empty heart by default, CSS class handles fill */
 }
 
 /* 添加收藏区样式 */
@@ -1070,8 +1073,9 @@ h3 {
     transition: color 0.3s, fill 0.3s;
     z-index: 10;
     opacity: 1 !important; /* 确保始终可见 */
-    visibility: visible !重要; /* 确保始终可见 */
-    display: block !重要; /* 强制显示 */
+    visibility: visible !important; /* 确保始终可见 */
+    display: block !important; /* 强制显示 */
+    fill: none;  /* Ensure empty heart by default, CSS class handles fill */
 }
 
 .watch-icon.active {
