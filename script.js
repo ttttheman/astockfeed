@@ -148,6 +148,15 @@ document.addEventListener('DOMContentLoaded', function() {
         tag.appendChild(qm);
     });
 
+    // 点击页面其他位置隐藏信号说明弹窗
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.signal-question') && !e.target.closest('.signal-tooltip')) {
+            document.querySelectorAll('.signal-tooltip').forEach(tooltip => {
+                tooltip.style.display = 'none';
+            });
+        }
+    });
+
     // 新增：确保所有股票价格前面都有¥符号
     document.querySelectorAll('.stock-price, .price, .stock-current-price').forEach(priceElement => {
         const priceText = priceElement.textContent.trim();
@@ -321,7 +330,17 @@ function addToWatchlist(code, name, sourceCard) {
     `;
     
     watchlistCards.appendChild(card);
-    
+    // 同步收藏卡片中股票价格颜色与涨幅
+    const priceEl = card.querySelector('.stock-current-price');
+    const returnEl = card.querySelector('.total-return');
+    if (priceEl && returnEl) {
+        if (returnEl.classList.contains('positive')) {
+            priceEl.classList.add('positive');
+        } else if (returnEl.classList.contains('negative')) {
+            priceEl.classList.add('negative');
+        }
+    }
+
     // 为新添加的收藏图标添加事件监听
     const watchIcon = card.querySelector('.watch-icon');
     watchIcon.onclick = (e) => {

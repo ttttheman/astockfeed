@@ -820,6 +820,7 @@ h3 {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: all 0.2s ease;
     padding-top: 4px; /* space for question mark */
+    padding-right: 28px; /* leave space for question mark */
 }
 
 .signal-tag:hover {
@@ -1196,6 +1197,12 @@ h3 {
     color: var(--neutral-color);
 }
 
+/* Fundamental & technical signal change labels: no background */
+.fundamental-signals .stock-price-info .stock-change,
+.technical-signals-container .stock-signal-card .stock-change {
+    background-color: transparent !important;
+}
+
 /* 页面分享按钮样式 */
 .share-button {
     position: fixed;
@@ -1308,3 +1315,9 @@ h3 {
 }
 
 /* Keep existing total-return styles */
+.signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
