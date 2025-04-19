@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 收藏图标点击事件
     document.querySelectorAll('.watch-icon').forEach(icon => {
-        const code = icon.getAttribute('data-code');
+        const code = icon    .getAttribute('data-code');
         const name = icon.closest('.stock-signal-card, .fundamental-card, .performance-card, .spotlight-card')?.querySelector('.stock-signal-name, .stock-name, h4')?.textContent.trim();
         
         if (code && name) {
@@ -132,21 +132,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // 修复信号标签的工具提示显示
+    // 为每个信号标签添加问号按钮，点击切换显示说明弹窗
     document.querySelectorAll('.signal-tag').forEach(tag => {
-        tag.addEventListener('mouseenter', function() {
-            const tooltip = this.querySelector('.signal-tooltip');
-            if (tooltip) {
-                tooltip.style.display = 'block';
-            }
-        });
-        
-        tag.addEventListener('mouseleave', function() {
-            const tooltip = this.querySelector('.signal-tooltip');
-            if (tooltip) {
-                tooltip.style.display = 'none';
-            }
-        });
+        const tooltip = tag.querySelector('.signal-tooltip');
+        if (!tooltip) return;
+        // 初始隐藏
+        tooltip.style.display = 'none';
+        const qm = document.createElement('span');
+        qm.className = 'signal-question';
+        qm.textContent = '?';
+        qm.onclick = (e) => {
+            e.stopPropagation();
+            tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+        };
+        tag.appendChild(qm);
     });
 
     // 新增：确保所有股票价格前面都有¥符号
@@ -264,7 +263,15 @@ function addToWatchlist(code, name, sourceCard) {
     } else if (sourceCard.querySelector('.price-info .change')) {
         returnText = sourceCard.querySelector('.price-info .change').textContent;
     }
-    
+    // 获取股票当前价格，优先从不同卡片结构中提取
+    let priceText = '¥0.00';
+    if (sourceCard.querySelector('.stock-current-price')) {
+        priceText = sourceCard.querySelector('.stock-current-price').textContent;
+    } else if (sourceCard.querySelector('.price-info .price')) {
+        priceText = sourceCard.querySelector('.price-info .price').textContent;
+    } else if (sourceCard.querySelector('.stock-price')) {
+        priceText = sourceCard.querySelector('.stock-price').textContent;
+    }
     // 获取推荐日期 - 如果没有则使用当前日期
     let suggestedDate = '2025/04/18';
     if (sourceCard.querySelector('.suggested-date')) {
@@ -290,7 +297,7 @@ function addToWatchlist(code, name, sourceCard) {
         `;
     }
     
-    // 创建收藏卡片HTML
+    // 创建收藏卡片HTML, include both price and return
     card.innerHTML = `
         <svg class="watch-icon active" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" data-code="${code}" onclick="event.stopPropagation(); toggleWatchlist('${code}', '${name}', this)">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -303,7 +310,10 @@ function addToWatchlist(code, name, sourceCard) {
                 <h4>${name}</h4>
                 <div class="suggested-date">${suggestedDate}</div>
             </div>
-            <div class="total-return positive">${returnText}</div>
+            <div class="performance-price-container">
+                <div class="stock-current-price">${priceText}</div>
+                <div class="total-return positive">${returnText}</div>
+            </div>
         </div>
         <div class="metrics-grid">
             ${metricsHtml}

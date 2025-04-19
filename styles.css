@@ -813,12 +813,13 @@ h3 {
     border-radius: 4px;
     font-size: 16px;  /* Increased from 14px for more prominence */
     font-weight: 600;  /* Increased from 500 to make more prominent */
-    position: relative;
+    position: relative; /* for absolute positioning of question mark */
     cursor: pointer;
     margin-bottom: 8px;
     display: inline-block;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: all 0.2s ease;
+    padding-top: 4px; /* space for question mark */
 }
 
 .signal-tag:hover {
@@ -829,22 +830,22 @@ h3 {
 
 /* Adding question mark tooltip to technical signals */
 .signal-tag .signal-question {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    line-height: 14px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
     text-align: center;
     background-color: rgba(0,0,0,0.1);
     color: #1890ff;
     border-radius: 50%;
-    margin-left: 5px;
-    font-size: 10px;
-    cursor: help;
-    position: relative;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .signal-tag .signal-tooltip {
-    display: none;
+    display: none; /* hide by default, show via click */
     position: absolute;
     z-index: 100;
     width: 220px;
@@ -853,16 +854,12 @@ h3 {
     padding: 10px;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    top: -5px;
-    left: 25px;
+    top: 20px;
+    left: 0;
     font-size: 12px;
     font-weight: normal;
     color: #333;
     line-height: 1.5;
-}
-
-.signal-tag .signal-question:hover .signal-tooltip {
-    display: block;
 }
 
 /* Stock price and chart styles */
@@ -1277,6 +1274,37 @@ h3 {
 .stock-current-price {
     font-size: 16px;
     font-weight: 600;
+}
+
+/* Uniform font sizing and weight for stock prices and change percentages */
+.stock-current-price,
+.stock-price,
+.price-info .price {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.total-return,
+.stock-change,
+.price-info .change {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+/* Fix fundamental and technical signal price-change layout */
+.fundamental-signals .fundamental-card .stock-price-info,
+.technical-signals-container .stock-signal-card .stock-price-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    justify-content: flex-start !important;
+}
+.fundamental-signals .fundamental-card .stock-price-info .stock-price,
+.fundamental-signals .fundamental-card .stock-price-info .stock-change,
+.technical-signals-container .stock-signal-card .stock-price-info .stock-price,
+.technical-signals-container .stock-signal-card .stock-price-info .stock-change {
+    font-size: 16px !important;
+    font-weight: 600 !important;
 }
 
 /* Keep existing total-return styles */
