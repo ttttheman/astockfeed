@@ -1046,7 +1046,7 @@ h3 {
 
 .watchlist-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 15px;
     margin-top: 15px;
 }
@@ -1389,17 +1389,4 @@ h3 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-}
-
-/* 强制覆盖 performance-cards 在中等和小屏幕的列数 */
-@media (max-width: 1200px) {
-    .performance-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .performance-cards {
-        grid-template-columns: 1fr;
-    }
 }
