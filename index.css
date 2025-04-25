@@ -289,22 +289,6 @@ h3 {
     margin-top: 15px;
 }
 
-.fundamental-card {
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 12px;
-    background-color: white;
-    flex: 1; /* 添加flex属性让卡片平均分配空间 */
-    min-width: 200px; /* 设置最小宽度防止卡片过小 */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.fundamental-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-}
-
 .signal-label {
     display: inline-block;
     padding: 2px 8px;
@@ -330,24 +314,9 @@ h3 {
 
 /* Stock Spotlight */
 .stock-spotlight-cards {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 15px;
-}
-
-.spotlight-card {
-    border: 1px solid var(--border-color);
-    border-radius: var(--card-radius);
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-}
-
-.spotlight-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .spotlight-header {
@@ -578,10 +547,8 @@ h3 {
         overflow-x: auto;
     }
     
-    /* 在中等屏幕上将性能卡片改为2列显示 */
-    .performance-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    /* 删除旧的性能卡片 2 列覆盖 */
+    /* .performance-cards { grid-template-columns: repeat(2, 1fr); } */
 }
 
 @media (max-width: 768px) {
@@ -627,17 +594,18 @@ h3 {
         grid-template-columns: 1fr; /* 单列显示 */
     }
     
-    /* 在小屏幕上性能卡片改为1列显示 */
-    .performance-cards, 
+    /* 性能卡片 2 列显示 */
+    .performance-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 焦点股票和基本面信号 1 列 */
     .stock-spotlight-cards,
     .fundamental-signals {
-        display: grid;
-        grid-template-columns: 1fr; /* 单列显示 */
-        gap: 15px;
+        grid-template-columns: 1fr;
     }
 }
 
-/* 添加小屏幕手机的响应式样式 */
 @media (max-width: 480px) {
     .container {
         padding: 0 10px; /* 在极小屏幕上进一步减少内边距 */
@@ -666,7 +634,12 @@ h3 {
         padding: 12px;
     }
     
-    /* 调整指标网格布局 */
+    /* 性能卡片 1 列显示 */
+    .performance-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 指标网格单列 */
     .metrics-grid {
         grid-template-columns: 1fr; /* 单列显示 */
     }
@@ -707,21 +680,22 @@ h3 {
 
 .performance-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 15px;
+    max-width: calc(3 * 240px + 2 * 15px);
+    margin: 0 auto;
 }
 
-.performance-card {
+.performance-card, .watchlist-card, .spotlight-card, .fundamental-card, .stock-signal-card {
     border: 1px solid var(--border-color);
     border-radius: var(--card-radius);
     padding: 15px;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    background-color: white;
+    background-color: var(--card-bg);
+    position: relative;
 }
-
-.performance-card:hover {
+.performance-card:hover, .watchlist-card:hover, .spotlight-card:hover, .fundamental-card:hover, .stock-signal-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
@@ -816,24 +790,9 @@ h3 {
 }
 
 .stock-signals {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 15px;
-}
-
-.stock-signal-card {
-    border: 1px solid #eee;
-    border-radius: 6px;
-    padding: 12px;
-    transition: all 0.3s;
-    display: flex;  /* Make card flex to allow left-right layout */
-    gap: 20px;      /* Space between stock info and signals */
-    align-items: flex-start;
-}
-
-.stock-signal-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transform: translateY(-2px);
 }
 
 .stock-signal-header {
@@ -1049,59 +1008,6 @@ h3 {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 15px;
     margin-top: 15px;
-}
-
-.watchlist-card {
-    border: 1px solid var(--border-color);
-    border-radius: var(--card-radius);
-    padding: 15px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    background-color: white;
-    position: relative;
-}
-
-.watchlist-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* 使收藏区卡片样式与性能卡片一致 */
-.watchlist-card .stock-chart {
-    width: 100%;
-    height: 120px;
-    background-color: #fafafa;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.watchlist-card .stock-performance-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.watchlist-card .stock-name-code h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 2px;
-}
-
-.watchlist-card .suggested-date {
-    font-size: 12px;
-    color: var(--secondary-text);
-}
-
-.watchlist-card .total-return {
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.watchlist-card .metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
 }
 
 .watchlist-header {
