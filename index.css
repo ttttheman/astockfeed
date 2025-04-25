@@ -33,7 +33,7 @@ body {
 .container {
     max-width: 100%; /* 修改为100%宽度，占满全屏 */
     margin: 0 auto;
-    padding: 0 80px; /* 将左右内边距从40px增加到80px，留出更多空间 */
+    padding: 0 40px; /* 将左右内边距从80px减小到40px，减少占用空间 */
 }
 
 .card {
@@ -571,18 +571,22 @@ h3 {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .container {
-        max-width: 95%; /* 大屏幕下保留5%的边距 */
-        padding: 0 60px; /* 相应增加中等屏幕的内边距 */
+        padding: 0 30px; /* 在中等屏幕上进一步减少内边距 */
     }
     
     .fundamental-signals {
         overflow-x: auto;
     }
+    
+    /* 在中等屏幕上将性能卡片改为2列显示 */
+    .performance-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 30px; /* 在小屏幕上也适当增加内边距 */
+        padding: 0 15px; /* 在小屏幕上显著减少内边距 */
     }
     
     .header-content {
@@ -600,6 +604,71 @@ h3 {
     
     .fundamental-card {
         width: 100%;
+    }
+
+    /* 改进市场概览布局 */
+    .market-overview {
+        position: relative;
+    }
+    
+    .indices-row {
+        position: static;
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 15px;
+    }
+    
+    .market-summary {
+        margin-right: 0; /* 取消右侧空白 */
+    }
+    
+    /* 改进卡片和网格布局 */
+    .two-column-grid {
+        grid-template-columns: 1fr; /* 单列显示 */
+    }
+    
+    /* 在小屏幕上性能卡片改为1列显示 */
+    .performance-cards, 
+    .stock-spotlight-cards,
+    .fundamental-signals {
+        display: grid;
+        grid-template-columns: 1fr; /* 单列显示 */
+        gap: 15px;
+    }
+}
+
+/* 添加小屏幕手机的响应式样式 */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px; /* 在极小屏幕上进一步减少内边距 */
+    }
+    
+    .card {
+        padding: 15px; /* 减少卡片内边距 */
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .date-info {
+        text-align: left;
+        margin-top: 10px;
+    }
+    
+    /* 调整股票卡片布局 */
+    .spotlight-card,
+    .performance-card,
+    .watchlist-card,
+    .fundamental-card,
+    .stock-signal-card {
+        padding: 12px;
+    }
+    
+    /* 调整指标网格布局 */
+    .metrics-grid {
+        grid-template-columns: 1fr; /* 单列显示 */
     }
 }
 
@@ -1320,4 +1389,17 @@ h3 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+}
+
+/* 强制覆盖 performance-cards 在中等和小屏幕的列数 */
+@media (max-width: 1200px) {
+    .performance-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .performance-cards {
+        grid-template-columns: 1fr;
+    }
 }
