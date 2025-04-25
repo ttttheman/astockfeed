@@ -596,7 +596,7 @@ h3 {
     
     /* 性能卡片 2 列显示 */
     .performance-cards {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     /* 焦点股票和基本面信号 1 列 */
@@ -636,7 +636,7 @@ h3 {
     
     /* 性能卡片 1 列显示 */
     .performance-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
     
     /* 指标网格单列 */
@@ -678,12 +678,13 @@ h3 {
     text-decoration: underline;
 }
 
-.performance-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 15px;
-    max-width: calc(3 * 240px + 2 * 15px);
-    margin: 0 auto;
+@media (min-width: 769px) {
+    .performance-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        width: 100%;
+    }
 }
 
 .performance-card, .watchlist-card, .spotlight-card, .fundamental-card, .stock-signal-card {
